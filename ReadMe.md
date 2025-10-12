@@ -1,25 +1,39 @@
-Thanks for downloading this theme!
+# Wedding Invitation
 
-## Other Useful Links
+Static single‑page wedding invitation / event site built with HTML5, CSS (Bootstrap + custom styles), a bit of jQuery plugins (carousel, countdown, popup), and Sass sources for customization.
 
-**ThemeWagon** is a great source for downloading free HTML templates built with the latest technology.
+## Contents
+Key top-level files:
+- `index.html` – landing / hero & countdown
+- `about.html`, `services.html`, `gallery.html`, `contact.html` – supporting pages
+- `css/` – compiled CSS assets (Bootstrap, animations, carousel, popup, custom `style.css`)
+- `sass/` – Sass source (Bootstrap partials + `style.scss` for theme overrides)
+- `js/` – vendor JS + initialization in `main.js`
+- `images/` – photography & background images
+- `fonts/` – icon & glyph fonts
 
-To download free templates, follow this link: https://themewagon.com/theme_tag/free/
+## Developing / Customizing
+You can edit the static HTML directly. For style changes:
+1. Modify variables / partials inside `sass/` (e.g. colors in `bootstrap/_variables.scss` or custom rules in `sass/style.scss`).
+2. Recompile Sass to CSS (you can choose any Sass compiler). Example with Dart Sass (install first):
+	`sass sass/style.scss css/style.css --style=compressed`
+3. Commit updated `css/style.css` (do not commit temporary caches).
 
-Besides that, you can buy our premium templates for making your web development experience unforgettable.
+## Deployment
+Because it is a pure static site, you can host it on:
+- GitHub Pages (recommended): push to `main`, then in repository Settings → Pages select the root (`/`).
+- Any static host (Netlify, Vercel, S3, etc.). Just upload the root directory.
 
-Visit the store from here: https://themewagon.com/theme-categories/premium-templates/
+## Future Ideas
+- Add form handling via a serverless service (Formspree, etc.).
+- Optimize images (convert large JPGs to modern formats, add lazy loading).
+- Bundle / tree‑shake JS (optional, current size is already small).
 
-Alternatively, here's our top most trending and selling items:
+## Credits
+Original HTML/CSS template assets came from a free Bootstrap-based wedding / event theme (ThemeWagon and related open-source components). Fonts & plugins remain under their respective licenses (Bootstrap, jQuery plugins, IcoMoon / Glyphicons). Replace third‑party promotional text with your own content as needed.
 
-* [**Sparrow**](https://themewagon.com/themes/sparrow/) - A multipurpose template made with Bootstrap 4.1 and world's finest animation.
-* [**Posh**](https://themewagon.com/themes/posh-html5-bootstrap-4-template/) - Bootstrap 4 template with a myriad number of ready-to-deploy sections. 
-* [**Elixir**](https://themewagon.com/themes/elixir-elegant-html5-bootstrap-template-consultancy-agency-website/) - Bootstrap 4 agency template. Best for smooth animated scrolling. 
-* [**Freya**](https://themewagon.com/themes/bootstrap-4-premium-interior-design-template-freya/) - Interior design template made with Bootstrap 4. 
-* [**Reign Pro**](https://themewagon.com/themes/reign-pro-premium-corporate-agency-html5-template/) - A corporate template with a visually unique design scheme. 
-* [**Boots4**](https://themewagon.com/themes/first-ever-bootstrap-4-template/) - One of the first Bootstrap 4 templates ever made on earth. 
-* [**Hideaway**](https://themewagon.com/themes/hideaway/) - A template for resorts. Built with Bootstrap 4. 
-* [**Baikal**](https://themewagon.com/themes/bootstrap-4-startup-small-business-website-template/) - A smart Bootstrap template for start-up. 
-* [**Mega Discount**](https://themewagon.com/themes/mega-discount-bundle/) - A bundle of 26 HTML5 templates; best value for your money. 
+## License
+Provide your chosen license here (e.g. MIT) if you plan to open-source modifications. Remove third‑party materials if their licenses are incompatible.
 
-
+---
+Feel free to adjust this README to match your event’s details (names, date, location, RSVP instructions).
