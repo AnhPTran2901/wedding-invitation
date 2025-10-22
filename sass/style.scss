@@ -503,6 +503,10 @@ h1, h2, h3, h4, h5, h6, figure {
 			float: left;
 			margin-bottom: 30px;
 		}
+		li{
+			display: block;
+			color: rgba($brand-white,.8);
+		}
 	}
 
 }
@@ -1321,9 +1325,11 @@ form {
 	.fh5co-heading {
 		h2 {
 			color: $brand-white;
+			margin-bottom: var(--space-2);
 		}
 		p{
 			color: rgba($brand-white,.5);
+			margin-top:0;
 		}
 	}
 

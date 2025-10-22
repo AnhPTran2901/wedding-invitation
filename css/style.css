@@ -1,9 +1,78 @@
+/* =========================================
+   FONTS & THEME
+   ========================================= */
+
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon/icomoon.eot?srf3rx");
   src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
+}
+
+:root{
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* keep your lilac palette from earlier */
+  --ink:       #9B68AE;
+  --muted:      #B38EB5;
+  --paper:      #FBF7F8;
+  --letter:     #E6A0A9;
+  --letter2:    #3e513e;
+  --border:     #e6dff5;   /* card border */
+  --accent:     #AE9AB2;   /* primary lilac */
+  --accent-2:   #AA7FA0;   /* lighter lilac */
+  --accent-ink: #ffffff;   /* text on lilac */
+}
+
+/* 2.2 Global section spacing (even top/bottom) */
+.hero,
+.couple-photo,
+#invite-line,
+#save-the-date.std,
+#fh5co-couple,
+#fh5co-event,
+#fh5co-couple-story,
+#fh5co-gallery,
+#fh5co-map{
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+@media (max-width: 768px){
+  .hero,
+  .couple-photo,
+  #invite-line,
+  #save-the-date.std,
+  #fh5co-couple,
+  #fh5co-event,
+  #fh5co-couple-story,
+  #fh5co-gallery,
+  #fh5co-map{
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+}
+
+@media (max-width: 768px){
+  .hero,
+  .couple-photo,
+  #invite-line,
+  #save-the-date.std,
+  #fh5co-couple,
+  #fh5co-event,
+  #fh5co-couple-story,
+  #fh5co-gallery,
+  #fh5co-map{
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
 }
 /* =======================================================
 *
@@ -16,7 +85,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #828282;
-  background: #fff;
+  background: var(--paper);
 }
 
 #page {
@@ -70,18 +139,23 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 ::-webkit-selection {
-  color: #fff;
-  background: #F14E95;
+color: #fff;
+  background: var(--muted);
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #F14E95;
+  background: var(--muted);
+}
+
+::-moz-selection {
+  color: #fff;
+  background: var(--muted);
 }
 
 ::selection {
   color: #fff;
-  background: #F14E95;
+  background: var(--muted);
 }
 
 .fh5co-nav {
@@ -107,7 +181,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .fh5co-nav a {
   padding: 5px 10px;
-  color: #fff;
+  color: var(--muted);
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav .menu-1, .fh5co-nav .menu-2 {
@@ -128,13 +202,13 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 14px;
   padding: 30px 10px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--muted);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 .fh5co-nav ul li a:hover, .fh5co-nav ul li a:focus, .fh5co-nav ul li a:active {
-  color: white;
+  color: var(--muted);
 }
 .fh5co-nav ul li.has-dropdown {
   position: relative;
@@ -193,18 +267,18 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #000;
 }
 .fh5co-nav ul li.has-dropdown:hover a, .fh5co-nav ul li.has-dropdown:focus a {
-  color: #fff;
+  color: var(--muted);
 }
 .fh5co-nav ul li.btn-cta a {
   color: #F14E95;
 }
 .fh5co-nav ul li.btn-cta a span {
-  background: #fff;
+  background: #ffff;
   padding: 4px 20px;
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -219,7 +293,7 @@ h1, h2, h3, h4, h5, h6, figure {
   box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
 }
 .fh5co-nav ul li.active > a {
-  color: #fff !important;
+  color: var(--muted) !important;
 }
 
 #fh5co-counter,
@@ -368,11 +442,11 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-counter .fh5co-heading h2,
 #fh5co-event .fh5co-heading h2 {
-  color: #fff;
+  color: var(--muted);
 }
 #fh5co-counter .fh5co-heading span,
 #fh5co-event .fh5co-heading span {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--letter2);
   text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 2px;
@@ -385,7 +459,7 @@ h1, h2, h3, h4, h5, h6, figure {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--paper);
 }
 @media screen and (max-width: 768px) {
   #fh5co-counter,
@@ -402,7 +476,8 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-counter .event-wrap,
 #fh5co-event .event-wrap {
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 3px solid rgba(155, 104, 174, 0.5);
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.1);
   padding: 30px;
   width: 100%;
@@ -410,7 +485,6 @@ h1, h2, h3, h4, h5, h6, figure {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
-  border-radius: 4px;
 }
 @media screen and (max-width: 768px) {
   #fh5co-counter .event-wrap,
@@ -421,7 +495,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-counter .event-wrap h3,
 #fh5co-event .event-wrap h3 {
   font-size: 20px;
-  color: #fff;
+  color: var(--letter);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   display: block;
   padding-bottom: 20px;
@@ -430,13 +504,14 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-counter .event-wrap p, #fh5co-counter .event-wrap span,
 #fh5co-event .event-wrap p,
-#fh5co-event .event-wrap span {
+#fh5co-event .event-wrap span,
+#fh5co-event .event-wrap li {
   display: block;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--letter2);
 }
 #fh5co-counter .event-wrap i,
 #fh5co-event .event-wrap i {
-  color: white;
+  color: var(--letter2);
   font-size: 20px;
 }
 #fh5co-counter .event-wrap .event-col,
@@ -767,7 +842,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   color: #F14E95;
   padding-left: 10px;
   padding-right: 10px;
@@ -935,21 +1010,29 @@ form label {
 .simply-countdown {
   /* The countdown */
   margin-bottom: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;   /* space them evenly */
+  gap: 16px;                        /* space between blocks */
 }
 
 .simply-countdown > .simply-section {
-  /* coutndown blocks */
-  display: inline-block;
-  width: 100px;
-  height: 100px;
+  /* countdown blocks */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --size: clamp(44px, 9vw, 72px);
+  width: var(--size);
+  aspect-ratio: 1 / 1;              /* keeps it square without fixed height */
+  /*height: 100px;
   background: rgba(241, 78, 149, 0.8);
-  margin: 0 4px;
+  margin: 0 4px;*/
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
-  border-radius: 50%;
+  border-radius: 999px;
   position: relative;
-  animation: pulse 1s ease infinite;
+  animation: pulse_countdown 1s ease infinite;
 }
 
 @keyframes pulse {
@@ -965,30 +1048,41 @@ form label {
 }
 .simply-countdown > .simply-section > div {
   /* countdown block inner div */
-  display: table-cell;
-  vertical-align: middle;
-  height: 100px;
-  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .simply-countdown > .simply-section .simply-amount,
 .simply-countdown > .simply-section .simply-word {
   display: block;
-  color: white;
+  color: #B38EB5;
   /* amounts and words */
 }
 
 .simply-countdown > .simply-section .simply-amount {
-  font-size: 30px;
-  /* amounts */
+  color: #B38EB5;
+  font-weight: 400;
+  line-height: 1;
+  font-size: clamp(16px, 3.4vw, 28px);
 }
 
 .simply-countdown > .simply-section .simply-word {
-  color: rgba(255, 255, 255, 0.7);
+  color: #B38EB5;
   text-transform: uppercase;
-  font-size: 12px;
-  /* words */
+  letter-spacing: .06em;
+  margin-top: 4px;
+  font-size: clamp(9px, 1.8vw, 12px);
 }
+@media (max-width: 420px){
+  .simply-countdown{ gap: 10px; justify-content: center; }
+}
+
+html { scroll-behavior: smooth; }
+
+/* If your nav overlaps the top of sections, give the target some offset */
+#fh5co-couple-story { scroll-margin-top: 90px; }
 
 #fh5co-testimonial,
 #fh5co-services,
@@ -1037,7 +1131,7 @@ form label {
   left: 0;
   right: 0;
   z-index: 99;
-  animation: pulse 1s ease infinite;
+  animation: pulse 1s ease infinite; 
 }
 .heart i {
   font-size: 20px;
@@ -1066,7 +1160,7 @@ form label {
 }
 .couple-half h3 {
   font-family: "Sacramento", Arial, serif;
-  color: #F14E95;
+  color: #B38EB5;
   font-size: 30px;
 }
 .couple-half .groom, .couple-half .bride {
@@ -1167,7 +1261,7 @@ form label {
 .feature-center h3 {
   text-transform: uppercase;
   font-size: 18px;
-  color: #5d5d5d;
+  color: var(--ink);
 }
 
 .fh5co-heading {
@@ -1181,7 +1275,7 @@ form label {
   margin-bottom: 10px;
   line-height: 1.5;
   font-weight: bold;
-  color: #F14E95;
+  color: var(--muted);
   font-family: "Sacramento", Arial, serif;
 }
 @media screen and (max-width: 768px) {
@@ -1418,7 +1512,7 @@ form label {
 }
 .owl-carousel .owl-controls .owl-dot.active span {
   background: transparent;
-  border: 2px solid #F14E95;
+  border: 2px solid #B38EB5;
 }
 
 #fh5co-offcanvas {
@@ -1671,21 +1765,21 @@ form label {
 }
 
 .btn-primary {
-  background: #F14E95;
+  background: var(--muted);
   color: #fff;
-  border: 2px solid #F14E95;
+  border: 2px solid var(--muted);
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #f366a3 !important;
-  border-color: #f366a3 !important;
+  background: var(--muted) !important;
+  border-color: var(--muted) !important;
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #F14E95;
-  border: 2px solid #F14E95;
+  color: var(--muted);
+  border: 2px solid var(--muted);
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #F14E95;
+  background: var(--muted);
   color: #fff;
 }
 
@@ -1841,3 +1935,505 @@ form label {
 }
 
 /*# sourceMappingURL=style.css.map */
+/* --- Wedding Hero --- */
+.hero {
+  padding: 80px 0 40px;
+  text-align: center;
+  background: var(--paper); /* subtle paper tone; change or remove if you prefer transparent */
+}
+
+.hero-illustration {
+  display: block;
+  max-width: 520px;
+  width: 70%;
+  height: auto;
+  margin: 0 auto 28px;
+}
+
+/* Use Allison only for the name lines */
+.hero-title .line{
+  font-family: 'Allison', cursive;
+  font-weight: 400;
+  text-transform: none;   /* scripts look better without uppercase */
+  letter-spacing: 0;
+  line-height: 0.9;
+  font-size: clamp(44px, 10vw, 96px); /* responsive size */
+}
+
+/* Keep the & on its own style (optional) */
+.hero-title .ampersand{
+  font-family: 'Allison', cursive; /*  also 'Allison' */
+  font-weight: 700;
+  letter-spacing: .05em;
+  font-size: clamp(28px, 6vw, 56px);
+  line-height: 1;
+  margin: 4px 0;
+}
+.hero-subtitle {
+  margin: 0 0 24px;
+  color: #B38EB5;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* Optional: underline style for the active nav like your reference */
+.fh5co-nav .menu-1 > ul > li > a {
+  position: relative;
+  padding-bottom: 6px;
+}
+.fh5co-nav .menu-1 > ul > li.active > a::after,
+.fh5co-nav .menu-1 > ul > li > a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 36px;
+  height: 2px;
+  background: var(--muted);
+}
+
+/* Couple photo */
+.couple-photo { 
+  background: var(--paper); 
+  margin-bottom: 5em; }
+.couple-photo-img {
+  display:block; 
+  max-width:920px;
+  width:50%; 
+  height:auto; margin:0 auto;
+  border-radius:12px; 
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+/* Calendar */
+
+.std-cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; padding:0 4px 14px; }
+.std-cal-grid .dow{ 
+  text-align:center; 
+  font-size:14px; 
+  color:var(--letter2);
+  padding:6px 0; 
+  border-bottom:1px solid #ece8e6; }
+#std-cal-days{ display:contents; } /* let injected cells flow */
+.std-day{
+  height:42px; display:flex; align-items:center; justify-content:center;
+  border-radius:8px; color:#2f3f52; background:#faf8f7;
+}
+@keyframes pulse_countdown{ 
+  0%{box-shadow:0 0 0 0 rgba(199,162,154,.45);} 
+  70%{box-shadow:0 0 0 14px rgba(199,162,154,0);} 
+  100%{box-shadow:0 0 0 0 rgba(199,162,154,0);} 
+}
+
+@media (max-width:991px){
+  .std{ padding:16px 0 24px; }
+  .simply-countdown .simply-amount{ font-size:30px; }
+}
+
+/* If you previously added this to push countdown down, undo it */
+.std-countdown-wrap{ margin-top: 0; }
+
+/* Keep the countdown from adding extra outside space */
+.std-countdown-wrap {
+  margin-top: auto;                 /* pushes the countdown to the bottom inside the card */
+}
+
+/* Cards & text */
+/* Button */
+.std-btn{
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.std-btn:hover{
+  box-shadow: 0 6px 16px rgba(155,106,142,.28);
+}
+
+/* Calendar */
+.std-day{ color: var(--letter2); background: var(--paper); }
+.std-day.muted{ color: var(--letter2); background: transparent; }
+.std-day.active{
+  background: var(--letter);
+  color: var(--accent-ink);
+  box-shadow: none;
+  animation: pulse-lilac 1.8s infinite ease-in-out;
+}
+@keyframes pulse-lilac{
+  0%   { box-shadow: 0 0 0 0 rgba(155,106,142,.45); }
+  70%  { box-shadow: 0 0 0 14px rgba(155,106,142,0); }
+  100% { box-shadow: 0 0 0 0 rgba(155,106,142,0); }
+}
+
+/* Optional: hero title/subtitle to lilac family */
+.hero-title{ color: var(--ink); }
+.hero-subtitle{ color: var(--muted); }
+
+/* ====== Layout: equal heights + bigger gap ====== */
+/* 2.4 Cards: slightly softer corners and shadow for a cute, airy look */
+.std-card{
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 12px 36px rgba(0,0,0,.05);
+}
+
+#save-the-date .row{
+  /*padding: 20px 0 72px;  top space creates the separation */
+  position: relative;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 40px;
+  align-items:stretch;   /* columns match height */
+  gap:40px;              /* space between the two cards */
+}
+#save-the-date .col-md-6{ 
+  display:flex; 
+  flex:1 1 0%; 
+}
+#save-the-date .std-card{
+  display:flex; 
+  flex-direction:column; 
+  width:100%; 
+  height:100%;
+  border:3px solid rgba(155, 104, 174, 0.5); 
+  padding: var(--space-5) var(--space-5);
+  border-radius:14px; 
+  background:#fff;
+  box-shadow:0 12px 36px rgba(0,0,0,.05);
+}
+
+/* ====== LEFT CARD: center everything like the reference ====== */
+#save-the-date .col-md-6:first-child .std-card{
+  /* Grid gives us precise vertical rhythm and keeps the button at bottom */
+  display:grid;
+  grid-template-rows: auto auto auto 1fr auto; /* title / sub / names / paragraph flex / button */
+  row-gap:var(--space-2);
+  justify-items:center;   /* center all items horizontally */
+  padding:28px 32px;
+}
+
+/* Headline “Save the Date” — script & centered */
+.std-kicker{
+  font-family: "Sacramento", Arial, serif;
+  font-weight:400;
+  letter-spacing:0;
+  font-size: clamp(34px, 5vw, 54px);
+  line-height:1.05;
+  margin:0;               /* remove extra top margin */
+  text-align:center;
+  color: var(--letter);
+}
+
+/* Small line: “For the wedding of” */
+.std-sub{
+  margin:0;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--letter2);
+  text-align:center;
+}
+
+/* Names — bold, centered */
+.std-names{
+  margin:0;
+  font-family: "Allison", cursive;
+  font-weight:700;
+  font-size: clamp(25px, 3vw, 30px);
+  letter-spacing:.02em;
+  color: var(--letter);
+  text-align:center;
+}
+
+/* Paragraph — narrow, centered, even lines */
+.std-note{
+  max-width: 32ch;        /* narrow measure like the screenshot */
+  text-align:center;
+  line-height:1.8;
+  color: var(--letter2);
+  margin: 6px 0 0;
+  justify-self:center;    /* stay centered inside the grid cell */
+}
+
+/* Button — centered; stays at the bottom via the grid layout */
+.std-btn{
+  display:inline-block;
+  background: var(--muted);     /* lilac */
+  color:#fff;
+  padding:12px 18px;
+  border-radius: 12px;
+  text-decoration:none;
+  transition:transform .1s, box-shadow .2s;
+}
+.std-btn:hover{ 
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(139,111,216,.28); 
+}
+
+/* ====== RIGHT CARD header spacing to match ====== */
+.std-cal-header{ 
+  text-align:center;
+  padding:10px 0 16px; 
+  font-weight:700;
+  letter-spacing:.16em; 
+  color: var(--letter); 
+}
+
+
+/* (keep any countdown styles you chose) */
+
+/* Center the nav row and neutralize Bootstrap floats */
+.fh5co-nav .row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.fh5co-nav .row > [class*="col-"]{ float:none; }  /* stop float-right/left from affecting centering */
+
+/* Center the menu list */
+.fh5co-nav .nav-center{ text-align:center !important; width:100%; }
+.fh5co-nav .nav-center > ul{
+  display:inline-flex;
+  align-items:center;
+  gap:28px;                 /* spacing between items */
+  padding:0;
+  margin:0 auto;
+}
+.fh5co-nav .nav-center > ul > li{ display:block; }
+
+/* Keep dropdown centered under its parent item */
+.fh5co-nav ul li.has-dropdown{ position:relative; }
+.fh5co-nav ul li.has-dropdown .dropdown{
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  visibility:hidden; opacity:0; transition:opacity .15s ease;
+}
+.fh5co-nav ul li.has-dropdown:hover .dropdown{
+  visibility:visible; opacity:1;
+}
+
+/* Show the menu on mobile (template hides .menu-1 at <=768px) */
+@media (max-width:768px){
+  .fh5co-nav .menu-1{ display:block !important; }
+}
+
+#invite-line{ text-align:center; padding:32px 0 8px; }
+#invite-line .fh5co-heading h2{
+  font-family:'Allison', cursive;
+  color: var(--ink);
+  font-size: clamp(34px, 5vw, 54px);
+  margin: 0 0 var(--space-2);
+}
+#invite-line .fh5co-heading .eyebrow{ 
+  text-transform:uppercase; 
+  font-weight: bold;
+  letter-spacing:.18em; 
+  font-size:clamp(14px,5vw,20px); 
+  color:var(--letter2); 
+  margin: 0 0 var(--space-1);
+}
+#invite-line .fh5co-heading .script{ 
+  font-size:clamp(14px,5vw,20px); 
+  color:var(--letter2,#2f2a44); 
+  margin:0 0 var(--space-1);
+}
+#invite-line .fh5co-heading .names{ 
+  margin:0; 
+  font-family:'Allison',cursive;
+  font-weight:700; 
+  font-size: clamp(28px, 6vw, 44px);
+  letter-spacing:.02em; 
+  color:var(--letter,#2f2a44); 
+}
+.fh5co-heading .amp{ 
+  font-family:'Allison',cursive; 
+  font-weight:700; 
+  font-size: clamp(28px, 6vw, 44px);
+  color:var(--letter,#2f2a44);
+}
+
+/* Wedding schedule */
+/* Center the whole schedule block within the card */
+/* Center the whole schedule block */
+.event-schedule{
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) auto 0;
+  width: -moz-fit-content;
+  width: fit-content;          /* shrink to content so margin:auto centers it */
+  text-align: center;          /* nice for the text columns */
+}
+
+/* Each row: compact, centered line = time | icon | text */
+.event-schedule li{
+  display: inline-flex !important;   /* beat any old grid/flex rules */
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0;
+  white-space: nowrap;               
+
+}
+
+/* Columns */
+.event-schedule .time{
+  min-width: 110px;                  /* fixed time column */
+  text-align: right;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+/* Kill the template's global img{display:block} for our icons */
+.event-schedule img{ display: inline-block !important; }
+
+.ico-png{
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.event-schedule .desc{
+  line-height: 1.6;
+  background: none;
+  color: inherit;
+  padding: 0;
+  border: 0;
+}
+
+
+/* Mobile spacing */
+@media (max-width:480px){
+  .event-schedule li{ padding:10px 0; }
+}
+
+/* Buttons row: centered, nice spacing, stacks on small screens */
+#fh5co-map .fh5co-heading p{ margin-bottom: var(--space-4); }
+#fh5co-map .fh5co-heading{
+  /* kill the template’s 5em gap under the heading */
+  margin-bottom: 12px;               /* was 5em */
+}
+#fh5co-map .map-actions{
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: 0 auto 18px;  
+  flex-wrap: wrap;
+}
+#fh5co-map .map-actions .btn{
+  border-radius: 999px;            /* pill buttons */
+  min-width: 190px;                /* nicer touch target */
+  text-transform: none;            /* keep your existing font/weight */
+}
+
+/* Responsive map (if you don’t already have these) */
+#fh5co-map .map-wrap{
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  max-width: 1100px;
+  margin: 0 auto 18px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+#fh5co-map .map-wrap iframe{
+  position: absolute;
+  display: block;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 16px;
+    
+}
+
+/* Travel time card */
+#fh5co-map .travel-times{
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto 20px;
+  padding: 22px 22px 18px;
+  background: var(--paper);
+  border: 2px dashed #e6dff5;          /* playful dashed edge */
+  border-radius: 20px;                  /* rounder corners */
+  box-shadow: 0 10px 28px rgba(155,106,142,.12); /* soft lilac shadow */
+  overflow: hidden;
+}
+
+/* little washi-tape stickers */
+#fh5co-map .travel-times::before,
+#fh5co-map .travel-times::after{
+  content:"";
+  position: absolute;
+  width: 84px; height: 22px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(155,124,207,.22) 0 10px,
+    rgba(188,164,230,.22) 10px 20px
+  );
+  border-radius: 6px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.06));
+}
+#fh5co-map .travel-times::before{ top:-10px; left:24px; transform: rotate(-5deg); }
+#fh5co-map .travel-times::after { top:-12px; right:26px; transform: rotate(6deg); }
+
+#fh5co-map .travel-times h3{
+  margin: 0 0 10px;
+  text-align: center;
+  letter-spacing: .02em;
+  color: var(--muted, #4b3b57);
+  font-size: clamp(15px, 4.2vw, 20px);
+}
+
+
+#fh5co-map .modes{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  background-color: var(--paper);
+}
+
+#fh5co-map .modes li{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 14px;
+  row-gap: 2px;
+  align-items: baseline;
+}
+
+#fh5co-map .modes li strong{
+  color: var(--muted, #4b3b57);
+}
+
+#fh5co-map .modes li span{
+  color: var(--muted, #4b3b57);
+}
+
+#fh5co-map .modes li small{
+  grid-column: 1 / -1;
+  color: var(--letter2);
+}
+
+#fh5co-map .tt-note{
+  margin: 12px 0 0;
+  text-align: center;
+  color: var(--letter2);
+  font-size: 14px;
+}
+
+/* Stack nicely on small screens */
+@media (max-width: 640px){
+  /* Tweak on small screens */
+  #fh5co-map .fh5co-heading{ margin-bottom: 8px; }
+  #fh5co-map .travel-times{ margin: 8px auto 22px; }
+  #fh5co-map .map-actions{ gap: 8px; margin-bottom: 14px; }
+  #fh5co-map .modes li{
+    grid-template-columns: 1fr;
+  }
+}
