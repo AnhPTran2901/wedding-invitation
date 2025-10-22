@@ -41,7 +41,8 @@
 #fh5co-event,
 #fh5co-couple-story,
 #fh5co-gallery,
-#fh5co-map{
+#fh5co-map,
+#fh5co-rsvp{
   padding-top: var(--space-7);
   padding-bottom: var(--space-7);
 }
@@ -54,7 +55,8 @@
   #fh5co-event,
   #fh5co-couple-story,
   #fh5co-gallery,
-  #fh5co-map{
+  #fh5co-map,
+  #fh5co-rsvp{
     padding-top: var(--space-5);
     padding-bottom: var(--space-5);
   }
@@ -69,7 +71,8 @@
   #fh5co-event,
   #fh5co-couple-story,
   #fh5co-gallery,
-  #fh5co-map{
+  #fh5co-map,
+  #fh5co-rsvp{
     padding-top: var(--space-5);
     padding-bottom: var(--space-5);
   }
@@ -1083,10 +1086,11 @@ html { scroll-behavior: smooth; }
 
 /* If your nav overlaps the top of sections, give the target some offset */
 #fh5co-couple-story { scroll-margin-top: 90px; }
+#fh5co-rsvp { scroll-margin-top: 90px; }
 
 #fh5co-testimonial,
 #fh5co-services,
-#fh5co-started,
+#fh5co-rsvp,
 #fh5co-footer,
 #fh5co-event,
 #fh5co-couple-story,
@@ -1099,7 +1103,7 @@ html { scroll-behavior: smooth; }
 @media screen and (max-width: 768px) {
   #fh5co-testimonial,
   #fh5co-services,
-  #fh5co-started,
+  #fh5co-rsvp,
   #fh5co-footer,
   #fh5co-event,
   #fh5co-couple-story,
@@ -1421,10 +1425,10 @@ html { scroll-behavior: smooth; }
   margin-bottom: 10px;
 }
 
-#fh5co-started {
+/* #fh5co-started {
   position: relative;
-}
-#fh5co-started .overlay {
+} */
+/* #fh5co-started .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -1434,8 +1438,8 @@ html { scroll-behavior: smooth; }
 }
 #fh5co-started .fh5co-heading h2 {
   color: #fff;
-}
-#fh5co-started .fh5co-heading p {
+} */
+/* #fh5co-started .fh5co-heading p {
   color: rgba(255, 255, 255, 0.5);
 }
 #fh5co-started .form-control {
@@ -1447,17 +1451,17 @@ html { scroll-behavior: smooth; }
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-}
-#fh5co-started .form-control::-webkit-input-placeholder {
+} */
+/* #fh5co-started .form-control::-webkit-input-placeholder {
   color: #fff;
-}
-#fh5co-started .form-control:-moz-placeholder {
+} */
+/* #fh5co-started .form-control:-moz-placeholder {
   /* Firefox 18- */
-  color: #fff;
-}
-#fh5co-started .form-control::-moz-placeholder {
+/*   color: #fff;
+} */
+/* #fh5co-started .form-control::-moz-placeholder {
   /* Firefox 19+ */
-  color: #fff;
+  /* color: #fff;
 }
 #fh5co-started .form-control:-ms-input-placeholder {
   color: #fff;
@@ -1489,14 +1493,32 @@ html { scroll-behavior: smooth; }
 #fh5co-started .fh5co-heading h2 {
   margin-bottom: 0;
 }
-
-@media screen and (max-width: 768px) {
+ */
+/* @media screen and (max-width: 768px) {
   #fh5co-footer .copyright .pull-left,
   #fh5co-footer .copyright .pull-right {
     float: none !important;
     text-align: center;
   }
+} */
+
+#fh5co-rsvp {
+  position: relative;
 }
+
+#fh5co-rsvp .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(251, 247, 248, 0.85);
+}
+#fh5co-rsvp .container {
+  position: relative;
+  z-index: 2;
+}
+
 #fh5co-footer .copyright .block {
   display: block;
 }
@@ -1977,6 +1999,13 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase;
 }
 
+#invite-line .invite-copy {
+  max-width: 640px;
+  margin: 20px auto 0;
+  font-size: 18px;
+  color: #5b6775;
+}
+
 /* Optional: underline style for the active nav like your reference */
 .fh5co-nav .menu-1 > ul > li > a {
   position: relative;
@@ -2077,6 +2106,173 @@ html { scroll-behavior: smooth; }
   border-radius: 14px;
   background: var(--paper);
   box-shadow: 0 12px 36px rgba(0,0,0,.05);
+}
+
+/* RSVP section */
+.fh5co-rsvp {
+  color: #2f3f52;
+}
+
+.rsvp-intro-card,
+.rsvp-form-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 18px 45px rgba(55, 45, 75, 0.18);
+  border: 1px solid rgba(199, 184, 210, 0.6);
+}
+
+.rsvp-intro-card h2 {
+  font-family: 'Sacramento', cursive;
+  font-size: 48px;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.rsvp-intro-card p {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.rsvp-note {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+
+.rsvp-details {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 20px;
+}
+
+.rsvp-details li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 16px;
+}
+
+.rsvp-details li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--letter);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.rsvp-alt.btn {
+  border-color: var(--letter);
+  color: var(--letter2);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 12px 26px;
+}
+
+.rsvp-alt.btn:hover,
+.rsvp-alt.btn:focus {
+  background: var(--letter);
+  color: #fff;
+  border-color: var(--letter);
+}
+
+.rsvp-form-card {
+  backdrop-filter: blur(4px);
+}
+
+.rsvp-form-title {
+  font-size: 26px;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+
+.rsvp-form-card label {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5b6775;
+}
+
+.rsvp-form-card .form-control,
+.rsvp-form-card select,
+.rsvp-form-card textarea {
+  border-radius: 10px;
+  border: 1px solid rgba(183, 166, 197, 0.6);
+  box-shadow: none;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #334155;
+}
+
+.rsvp-form-card .form-control:focus,
+.rsvp-form-card select:focus,
+.rsvp-form-card textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(174, 154, 178, 0.2);
+}
+
+.rsvp-form-card .form-group {
+  margin-bottom: 18px;
+}
+
+.rsvp-submit {
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+  padding: 14px 28px;
+}
+
+.rsvp-submit:hover,
+.rsvp-submit:focus {
+  background: var(--accent-2) !important;
+  border-color: var(--accent-2) !important;
+}
+
+.form-footnote {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.form-status {
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.form-status.pending {
+  color: #8b5cf6;
+}
+
+.form-status.success {
+  color: #15803d;
+}
+
+.form-status.error {
+  color: #b91c1c;
+}
+
+@media (max-width: 991px) {
+  .rsvp-intro-card,
+  .rsvp-form-card {
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rsvp-intro-card,
+  .rsvp-form-card {
+    padding: 24px;
+  }
+
+  .rsvp-intro-card h2 {
+    font-size: 40px;
+  }
+
+  .rsvp-form-title {
+    font-size: 22px;
+  }
 }
 
 #save-the-date .row{
@@ -2274,7 +2470,7 @@ html { scroll-behavior: smooth; }
   justify-content: center;
   gap: 12px;
   padding: 10px 0;
-  white-space: nowrap;               
+  white-space: nowrap;     
 
 }
 
@@ -2287,12 +2483,12 @@ html { scroll-behavior: smooth; }
 }
 
 /* Kill the template's global img{display:block} for our icons */
-.event-schedule img{ display: inline-block !important; }
 
 .ico-png{
   width: 22px;
   height: 22px;
   object-fit: contain;
+  display: inline-block !important;
   vertical-align: middle;
 }
 
