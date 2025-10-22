@@ -2109,6 +2109,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* RSVP section */
+/* RSVP section */
 .fh5co-rsvp {
   color: #2f3f52;
 }
@@ -2251,6 +2252,51 @@ html { scroll-behavior: smooth; }
 
 .form-status.error {
   color: #b91c1c;
+}
+
+@media (min-width: 992px) {
+  .rsvp-columns {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  .rsvp-columns > [class*="col-"] {
+    float: none;
+    width: auto;
+    display: flex;
+  }
+
+  .rsvp-intro-card,
+  .rsvp-form-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .rsvp-intro-card .rsvp-alt {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .rsvp-form-card form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .rsvp-form-card .rsvp-submit {
+    margin-top: 8px;
+  }
+
+  .rsvp-form-card .form-footnote {
+    margin-top: auto;
+  }
+
+  .rsvp-form-card .form-status {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 991px) {
