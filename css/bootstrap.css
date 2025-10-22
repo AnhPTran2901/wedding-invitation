@@ -344,12 +344,13 @@ textarea {
 }
 
 a {
-  color: #337ab7;
+  color: var(--ink);
   text-decoration: none;
 }
 a:hover, a:focus {
-  color: #23527c;
+  color: var(--muted);
   text-decoration: underline;
+  text-decoration-color: var(--ink);
 }
 a:focus {
   outline: thin dotted;
@@ -2864,7 +2865,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   border-color: transparent;
 }
 .btn-link:hover, .btn-link:focus {
-  color: #23527c;
+  color: var(--muted);
   text-decoration: underline;
   background-color: transparent;
 }

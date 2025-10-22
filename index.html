@@ -3,10 +3,15 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet">
+
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Wedding &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<title>Wedding &mdash; </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -71,66 +76,92 @@
 	
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-2">
-					<div id="fh5co-logo"><a href="index.html">Wedding<strong>.</strong></a></div>
-				</div>
-				<div class="col-xs-10 text-right menu-1">
-					<ul>
-						<li class="active"><a href="index.html">Home</a></li>
-						<li><a href="about.html">Story</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">Services</a>
-							<ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-						<li class="has-dropdown">
-							<a href="gallery.html">Gallery</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-			
+	<div class="container">
+		<div class="row">
+		<div class="col-xs-12 menu-1 nav-center">
+			<ul>
+			<li class="active"><a href="index.html">Home</a></li>
+			<li><a href="#fh5co-event" class="nav-scroll">Event Timeline</a></li>
+			<li><a href="#fh5co-couple-story" class="nav-scroll">Story</a></li>
+			<li><a href="#fh5co-gallery" class="nav-scroll">Gallery</a></li>
+			<li><a href="#fh5co-map" class="nav-scroll">How to get there</a></li>
+			<li><a href="#fh5co-contact" class="nav-scroll">Contact</a></li>
+			</ul>
 		</div>
+		</div>
+	</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-9 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Phuong Anh &amp; Trung</h1>
-							<h2>We Are Getting Married</h2>
-							<div class="simply-countdown simply-countdown-one"></div>
-							<p><a href="#" class="btn btn-default btn-sm">Save the date</a></p>
-						</div>
-					</div>
-				</div>
+	<!-- HERO -->
+	<section class="hero">
+	<img src="images/img_bg_2.jpg" alt="Wedding illustration" class="hero-illustration" />
+
+	<h1 class="hero-title">
+		<span class="line">Phuong Anh</span>
+		<span class="ampersand">&amp;</span>
+		<span class="line">Dac Trung</span>
+	</h1>
+
+	<p class="hero-subtitle">DECEMBER 27, 2025 • HA NOI, VIETNAM</p>
+	</section>
+
+	<!-- COUPLE PHOTO -->
+	<section class="couple-photo">
+	<img src="images/couple-3.jpg" alt="Phuong Anh & Dac Trung" class="couple-photo-img">
+	</section>
+
+	<section id="invite-line ">
+	<div class="container text-center fh5co-heading animate-box">
+		<h2>Hello!</h2>
+		<h3 class="eyebrow">You’re invited</h3>
+		<p class="script">To celebrate the marriage of</p>
+		<p class="names">Phuong Anh Tran <span class="amp">&amp;</span> Dac Trung Nguyen</p>
+	</div>
+	</section>
+
+	<!-- SAVE THE DATE -->
+	<section id="save-the-date" class="std animate-box">
+	<div class="container">
+		<div class="row">
+		<!-- Left card -->
+		<div class="col-md-6">
+			<div class="std-card">
+			<h3 class="std-kicker">Save the Date</h3>
+			<p class="std-sub">For the wedding of</p>
+			<h2 class="std-names">Phuong Anh <span>&amp;</span> Dac Trung</h2>
+			<p class="std-note">
+				Your kind wishes would mean the world to us
+			</p>
+			<a href="#fh5co-started" class="std-btn">Send your wishes →</a>
 			</div>
 		</div>
-	</header>
 
+		<!-- Right card: calendar + simplyCountdown -->
+		<div class="col-md-6">
+			<div class="std-card">
+			<div class="std-cal-header">
+				<span id="std-cal-month">DECEMBER / 2025</span>
+			</div>
+			<div class="std-cal-grid">
+				<div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div>
+				<div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+				<div id="std-cal-days"></div>
+			</div>
+
+			<!-- Countdown container (simplyCountdown will inject content here) -->
+			<div class="std-countdown-wrap">
+				<div class="simply-countdown std-countdown"></div>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	</section>
 	<div id="fh5co-couple">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
-					<h2>Hello!</h2>
-					<h3>December 27th, 2025 Hanoi, Vietnam</h3>
-					<p>We invited you to celebrate our wedding</p>
+					<h2>Meet the couple!</h2>
 				</div>
 			</div>
 			<div class="couple-wrap animate-box">
@@ -157,7 +188,7 @@
 		</div>
 	</div>
 
-	<div id="fh5co-event" class="fh5co-bg" style="background-image:url(images/img_bg_3.jpg);">
+	<div id="fh5co-event" class="fh5co-bg">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -183,15 +214,36 @@
 										<span>Saturday 27</span>
 										<span>December, 2025</span>
 									</div>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									<ul class="event-schedule">
+									<li>
+										<span class="time">9:00 AM</span>
+										<img src="images/wedding-bell.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Welcome & Guest Seating</span>
+									</li>
+									<li>
+										<span class="time">9:30 AM</span>
+										<img src="images/interlocking-rings.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Exchange of Vows</span>
+									</li>
+									<li>
+										<span class="time">10:00 AM</span>
+										<img src="images/camera-with-flash.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Photos</span>
+									</li>
+									<li>
+										<span class="time">10:40 AM</span>
+										<img src="images/champagne-glasses.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Move to Reception Area</span>
+									</li>
+									</ul>
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6 text-center">
 								<div class="event-wrap animate-box">
-									<h3>Wedding Party</h3>
+									<h3>Reception</h3>
 									<div class="event-col">
 										<i class="icon-clock"></i>
-										<span>12:00 PM</span>
+										<span>11:00 AM</span>
 										<span>2:00 PM</span>
 									</div>
 									<div class="event-col">
@@ -199,7 +251,28 @@
 										<span>Saturday 27</span>
 										<span>December, 2025</span>
 									</div>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									<ul class="event-schedule">
+									<li>
+										<span class="time">11:00 AM</span>
+										<img src="images/wedding-bell.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Welcome to the Ballroom</span>
+									</li>
+									<li>
+										<span class="time">11:30 AM</span>
+										<img src="images/wedding-cake.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Reception Begins</span>
+									</li>
+									<li>
+										<span class="time">12:30 PM</span>
+										<img src="images/wedding-cake.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">First Dance</span>
+									</li>
+									<li>
+										<span class="time">1:00 PM</span>
+										<img src="images/bouquet-of-roses.png" alt="" class="ico-png" loading="lazy">
+										<span class="desc">Confetti Shower</span>
+									</li>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -215,8 +288,7 @@
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
 					<span>We Love Each Other</span>
 					<h2>Our Story</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-				</div>
+					<p>Our Story is coming soon</p>
 			</div>
 			<div class="row">
 				<div class="col-md-12 col-md-offset-0">
@@ -226,10 +298,10 @@
 							<div class="timeline-panel">
 								<div class="timeline-heading">
 									<h3 class="timeline-title">First We Meet</h3>
-									<span class="date">December 25, 2015</span>
+									<span class="date">October 1, 2022</span>
 								</div>
 								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									<p>Our first meet is coming soon.</p>
 								</div>
 							</div>
 						</li>
@@ -238,10 +310,10 @@
 							<div class="timeline-panel">
 								<div class="timeline-heading">
 									<h3 class="timeline-title">First Date</h3>
-									<span class="date">December 28, 2015</span>
+									<span class="date">October 7, 2022</span>
 								</div>
 								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									<p>Our first date is coming soon.</p>
 								</div>
 							</div>
 						</li>
@@ -250,10 +322,10 @@
 							<div class="timeline-panel">
 								<div class="timeline-heading">
 									<h3 class="timeline-title">In A Relationship</h3>
-									<span class="date">January 1, 2016</span>
+									<span class="date">December 1, 2022</span>
 								</div>
 								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+									<p>We are officially a couple.</p>
 								</div>
 							</div>
 						</li>
@@ -359,7 +431,7 @@
 		</div>
 	</div>
 
-	<div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image:url(images/img_bg_5.jpg);">
+	<!-- <div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image:url(images/img_bg_5.jpg);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -410,7 +482,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div id="fh5co-testimonial">
 		<div class="container">
@@ -466,7 +538,75 @@
 		</div>
 	</div>
 
-	<div id="fh5co-services" class="fh5co-section-gray">
+	<div id="fh5co-map">
+	<div class="container">
+		<div class="row animate-box">
+		<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+			<span>How to get there</span>
+			<h2>Venue Map</h2>
+			<p>Almaz Convention Center, Long Biên, Hà Nội</p>
+		</div>
+
+		<!-- Put travel-times inside a column so it respects gutters -->
+		<div class="col-md-10 col-md-offset-1">
+			<div class="travel-times">
+			<h3>From Hoàn Kiếm (Guom) Lake → Almaz Convention Center</h3>
+			<ul class="modes">
+				<li>
+				<strong>Taxi / Ride-hailing (Grab, XanhSM)</strong>
+				<span>≈ 20–35 min off-peak • 30–60 min at rush hour</span>
+				<small>This is the easiest option (especially if you are not familiar with the area). Say “Almaz Convention Center, Vinhomes Riverside,” sit back and enjoy the view.</small>
+				</li>
+				<li>
+				<strong>Motorbike (GrabBike or personal)</strong>
+				<span>≈ 20–30 min</span>
+				<small>Usually the quickest through traffic.</small>
+				</li>
+				<li>
+				<strong>Bus + short taxi</strong>
+				<span>≈ 45–70 min</span>
+				<small>Bus toward Long Biên / Vinhomes Riverside, then 5–10 min taxi to Almaz.</small>
+				</li>
+				<li>
+				<strong>Driving & parking</strong>
+				<span>≈ 30–60 min</span>
+				<small>Parking available at Almaz / Vinhomes Riverside.</small>
+				</li>
+			</ul>
+			<p class="tt-note">
+				Traffic in Hà Nội is busiest on weekdays <strong>7:00–9:00</strong> and <strong>16:30–19:00</strong>.
+				Please add a <strong>15–20 min buffer</strong> to arrive comfortably.
+			</p>
+			</div>
+		</div>
+		</div>
+
+		<!-- CTA row between text and map -->
+		<div class="map-actions animate-box">
+		<a class="btn btn-primary btn-md" target="_blank"
+			href="https://www.google.com/maps/dir/?api=1&destination=Almaz%20Convention%20Center%2C%20Long%20Bien%2C%20Hanoi&travelmode=driving">
+			Get Directions
+		</a>
+		<a class="btn btn-outline btn-md" target="_blank"
+			href="https://www.google.com/maps/place/Almaz%20Convention%20Center%2C%20Long%20Bien%2C%20Hanoi">
+			Open in Google Maps
+		</a>
+		</div>
+	</div>
+
+	<!-- Map after the CTAs -->
+	<div class="map-wrap animate-box">
+		<iframe
+		title="Almaz Convention Center on Google Maps"
+		src="https://www.google.com/maps?q=Almaz%20Convention%20Center%2C%20Long%20Bien%2C%20Hanoi&output=embed"
+		loading="lazy" allowfullscreen
+		referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</div>
+	</div>
+
+
+
+	<!-- <div id="fh5co-services" class="fh5co-section-gray">
 		<div class="container">
 			
 			<div class="row animate-box">
@@ -520,7 +660,7 @@
 
 			
 		</div>
-	</div>
+	</div> -->
 
 
 	<div id="fh5co-started" class="fh5co-bg" style="background-image:url(images/img_bg_4.jpg);">
@@ -555,8 +695,10 @@
 			</div>
 		</div>
 	</div>
+	<!-- Put two SVG files in /images/: ring.svg and camera.svg from SVG Repo -->
 
-	<footer id="fh5co-footer" role="contentinfo">
+
+	<!-- <footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 
 			<div class="row copyright">
@@ -578,7 +720,7 @@
 
 		</div>
 	</footer>
-	</div>
+	</div> -->
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
@@ -608,24 +750,58 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
-	<script>
-    var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
+	<!-- Save-the-Date calendar + simplyCountdown init -->
+<script>
+  // === CONFIGURE YOUR EVENT DATE HERE ===
+  const EVENT_YEAR  = 2025;
+  const EVENT_MONTH = 12;   // September
+  const EVENT_DAY   = 27;  // 20th
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
+  function renderCalendar(year, month, day) {
+    const monthIndex = month - 1;
+    const first = new Date(year, monthIndex, 1);
+    const last  = new Date(year, monthIndex + 1, 0);
+    const startWeekday = first.getDay();
+    const daysInMonth  = last.getDate();
 
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
+    const monthNames = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+    const label = document.getElementById("std-cal-month");
+    if (label) label.textContent = `${monthNames[monthIndex]} / ${year}`;
+
+    const host = document.getElementById("std-cal-days");
+    if (!host) return;
+    host.innerHTML = "";
+
+    for (let i = 0; i < startWeekday; i++) {
+      const b = document.createElement("div");
+      b.className = "std-day muted";
+      host.appendChild(b);
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement("div");
+      cell.className = "std-day" + (d === day ? " active" : "");
+      cell.textContent = d;
+      host.appendChild(cell);
+    }
+  }
+
+  // Render calendar
+  renderCalendar(EVENT_YEAR, EVENT_MONTH, EVENT_DAY);
+
+  // simplyCountdown must run after js/simplyCountdown.js is loaded (it is)
+  simplyCountdown('.std-countdown', {
+    year: EVENT_YEAR,
+    month: EVENT_MONTH,
+    day: EVENT_DAY,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    enableUtc: false,
+    zeroPad: true,
+    words: { days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds', pluralLetter: '' }
+  });
 </script>
+
 
 	</body>
 </html>
