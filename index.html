@@ -706,65 +706,63 @@
 	<section id="fh5co-rsvp" class="fh5co-rsvp fh5co-bg" style="background-image:url(images/img_bg_4.jpg);" data-scroll-spy data-scroll-label="RSVP">
 	<div class="overlay"></div>
 	<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-4">
-						<div class="rsvp-intro-card">
-							<h2>RSVP</h2>
-							<p>We would be honored to celebrate with you. Kindly respond by <strong>November 30, 2025</strong> so we can save you a seat and prepare your favorite bites.</p>
-							<ul class="rsvp-details">
-									<li><strong>Dress code:</strong> Garden chic &mdash; light fabrics, pops of color, comfortable shoes.</li>
-									<li><strong>Reception:</strong> Lunch with vegetarian and kid-friendly options.</li>
-									<li><strong>Need help?</strong> Email <a href="mailto:hello@phuonganh-dactrung.com">hello@phuonganh-dactrung.com</a> or call Trung at <a href="tel:+84988330011">+84 988 330 011</a>.</li>
-							</ul>
-							<p class="rsvp-note">If you prefer Google Forms, use the link below to open the RSVP in a new tab.</p>
-							<!-- Replace the link below with your published Google Form URL -->
-							<a class="btn btn-outline rsvp-alt" target="_blank" rel="noopener" href="https://forms.gle/replace-with-your-form">Open Google Form</a>
-						</div>
+		<div class="rsvp-layout animate-box">
+			<article class="rsvp-card rsvp-intro-card">
+				<header class="rsvp-card-header">
+					<!-- <span class="rsvp-tag">We're excited to celebrate</span> -->
+					<h2>RSVP</h2>
+				</header>
+				<p>We would be honored to celebrate with you. Kindly respond by <strong>November 30, 2025</strong> so we can save you a seat and prepare your favorite bites.</p>
+				<ul class="rsvp-details">
+					<li><strong>Dress code:</strong> Garden chic &mdash; light fabrics, pops of color, comfortable shoes.</li>
+					<li><strong>Reception:</strong> Lunch with vegetarian and kid-friendly options.</li>
+					<li><strong>Need help?</strong> Email <a href="mailto:hello@phuonganh-dactrung.com">hello@phuonganh-dactrung.com</a> or call Trung at <a href="tel:+84988330011">+84 988 330 011</a>.</li>
+				</ul>
+				<p class="rsvp-note">If you prefer Google Forms, use the link below to open the RSVP in a new tab.</p>
+				<!-- Replace the link below with your published Google Form URL -->
+				<a class="btn btn-outline rsvp-alt" target="_blank" rel="noopener" href="https://forms.gle/replace-with-your-form">Open Google Form</a>
+			</article>
+			<article class="rsvp-card rsvp-form-card">
+				<h3 class="rsvp-form-title">Confirm your attendance</h3>
+				<!-- Update the email in the action attribute to the inbox that should receive RSVP notifications -->
+				<form id="rsvp-form" action="https://formsubmit.co/hello@phuonganh-dactrung.com" method="POST">
+				<input type="hidden" name="_subject" value="Wedding RSVP — Phuong Anh &amp; Dac Trung">
+				<input type="hidden" name="_template" value="table">
+				<input type="hidden" name="_captcha" value="false">
+				<div class="form-group">
+								<label for="rsvp-name">Full name</label>
+								<input type="text" class="form-control" id="rsvp-name" name="Name" placeholder="e.g., Nguyen Thi Lan" required>
 				</div>
-				<div class="col-md-7 col-md-offset-1">
-						<div class="rsvp-form-card">
-							<h3 class="rsvp-form-title">Confirm your attendance</h3>
-							<!-- Update the email in the action attribute to the inbox that should receive RSVP notifications -->
-							<form id="rsvp-form" action="https://formsubmit.co/hello@phuonganh-dactrung.com" method="POST">
-									<input type="hidden" name="_subject" value="Wedding RSVP — Phuong Anh &amp; Dac Trung">
-									<input type="hidden" name="_template" value="table">
-									<input type="hidden" name="_captcha" value="false">
-									<div class="form-group">
-											<label for="rsvp-name">Full name</label>
-											<input type="text" class="form-control" id="rsvp-name" name="Name" placeholder="e.g., Nguyen Thi Lan" required>
-									</div>
-									<div class="form-group">
-											<label for="rsvp-email">Email</label>
-											<input type="email" class="form-control" id="rsvp-email" name="Email" placeholder="you@example.com" required>
-									</div>
-									<div class="form-group">
-											<label for="rsvp-phone">Phone number</label>
-											<input type="tel" class="form-control" id="rsvp-phone" name="Phone" placeholder="Optional">
-									</div>
-									<div class="form-group">
-											<label for="rsvp-attendance">Will you join us?</label>
-											<select id="rsvp-attendance" class="form-control" name="Attendance" required>
-													<option value="" disabled selected>Select an option</option>
-													<option value="Happily attending">Happily attending</option>
-													<option value="Attending from ceremony">Ceremony only</option>
-													<option value="Celebrating from afar">Celebrating from afar</option>
-											</select>
-									</div>
-									<div class="form-group">
-											<label for="rsvp-guests">Number of guests (including you)</label>
-											<input type="number" min="1" max="6" class="form-control" id="rsvp-guests" name="Guests" placeholder="1" required>
-									</div>
-									<div class="form-group">
-											<label for="rsvp-diet">Dietary notes or song requests</label>
-											<textarea id="rsvp-diet" class="form-control" name="Notes" rows="3" placeholder="Tell us about allergies, favorite brunch dish, or a song we should play."></textarea>
-									</div>
-									<button type="submit" class="btn btn-primary btn-block rsvp-submit">Send RSVP</button>
-									<p class="form-footnote">Responses are sent securely via <a href="https://formsubmit.co/" target="_blank" rel="noopener">FormSubmit</a>. Update the email address in this section to receive replies in your inbox.</p>
-									<div class="form-status" role="status" aria-live="polite"></div>
-							</form>
-						</div>
+				<div class="form-group">
+								<label for="rsvp-email">Email</label>
+								<input type="email" class="form-control" id="rsvp-email" name="Email" placeholder="you@example.com" required>
 				</div>
-			</div>
+				<div class="form-group">
+					<label for="rsvp-phone">Phone number</label>
+					<input type="tel" class="form-control" id="rsvp-phone" name="Phone" placeholder="Optional">
+				</div>
+				<div class="form-group">
+					<label for="rsvp-attendance">Will you join us?</label>
+					<select id="rsvp-attendance" class="form-control" name="Attendance" required>
+						<option value="" disabled selected>Select an option</option>
+						<option value="Happily attending">Happily attending</option>
+						<option value="Celebrating from afar">Celebrating from afar</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="rsvp-guests">Number of guests (including you)</label>
+					<input type="number" min="1" max="6" class="form-control" id="rsvp-guests" name="Guests" placeholder="1" required>
+				</div>
+				<div class="form-group">
+					<label for="rsvp-diet">Dietary notes or song requests</label>
+					<textarea id="rsvp-diet" class="form-control" name="Notes" rows="3" placeholder="Tell us about allergies, favorite brunch dish, or a song we should play."></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block rsvp-submit">Send RSVP</button>
+				<p class="form-footnote">Responses are sent securely via <a href="https://formsubmit.co/" target="_blank" rel="noopener">FormSubmit</a>. Update the email address in this section to receive replies in your inbox.</p>
+				<div class="form-status" role="status" aria-live="polite"></div>
+			</form>
+			</article>
+	</div>
 	</div>
 	</section>
 	<!-- Put two SVG files in /images/: ring.svg and camera.svg from SVG Repo -->

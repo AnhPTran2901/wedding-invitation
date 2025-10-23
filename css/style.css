@@ -2109,19 +2109,55 @@ html { scroll-behavior: smooth; }
 }
 
 /* RSVP section */
-/* RSVP section */
 .fh5co-rsvp {
   color: #2f3f52;
 }
 
-.rsvp-intro-card,
-.rsvp-form-card {
+.rsvp-layout {
+  display: grid;
+  gap: 28px;
+}
+
+.rsvp-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: rgba(255, 255, 255, 0.94);
-  border-radius: 18px;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 36px;
   box-shadow: 0 18px 45px rgba(55, 45, 75, 0.18);
   border: 1px solid rgba(199, 184, 210, 0.6);
-  transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.rsvp-card:hover,
+.rsvp-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(55, 45, 75, 0.22);
+  border-color: rgba(174, 154, 178, 0.6);
+}
+
+.rsvp-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+/* .rsvp-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(174, 154, 178, 0.18);
+  border-radius: 999px;
+} */
+
+.rsvp-card.rsvp-form-card {
+  backdrop-filter: blur(4px);
 }
 
 .rsvp-intro-card h2 {
@@ -2166,6 +2202,11 @@ html { scroll-behavior: smooth; }
 }
 
 .rsvp-alt.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
@@ -2175,19 +2216,20 @@ html { scroll-behavior: smooth; }
 
 .rsvp-alt.btn:hover,
 .rsvp-alt.btn:focus {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
-.rsvp-form-card {
-  backdrop-filter: blur(4px);
+  background: var(--accent-2) !important;
+  border-color: var(--accent-2) !important;
 }
 
 .rsvp-form-title {
   font-size: 26px;
   margin-bottom: 24px;
   color: var(--muted);
+}
+
+.rsvp-form-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .rsvp-form-card label {
@@ -2225,6 +2267,7 @@ html { scroll-behavior: smooth; }
   border-color: var(--accent);
   font-weight: 600;
   padding: 14px 28px;
+  margin-top: 8px;
 }
 
 .rsvp-submit:hover,
@@ -2234,13 +2277,13 @@ html { scroll-behavior: smooth; }
 }
 
 .form-footnote {
-  margin-top: 16px;
+  margin-top: auto;
   font-size: 13px;
   color: #6b7280;
 }
 
 .form-status {
-  margin-top: 14px;
+  margin-top: 10px;
   font-weight: 600;
 }
 
@@ -2256,65 +2299,35 @@ html { scroll-behavior: smooth; }
   color: #b91c1c;
 }
 
+@media (min-width: 768px) {
+  .rsvp-layout {
+    gap: 32px;
+  }
+}
 @media (min-width: 992px) {
-  .rsvp-columns {
-    display: grid;
-    grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
-    gap: 40px;
+  .rsvp-layout {
+    grid-template-columns: minmax(280px, 0.95fr) minmax(360px, 1.05fr);
     align-items: stretch;
   }
 
-  .rsvp-columns > [class*="col-"] {
-    float: none;
-    width: auto;
-    display: flex;
-  }
-
-  .rsvp-intro-card,
-  .rsvp-form-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .rsvp-intro-card .rsvp-alt {
+  .rsvp-card.rsvp-intro-card .rsvp-alt {
     margin-top: auto;
-    align-self: flex-start;
-  }
-
-  .rsvp-form-card form {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .rsvp-form-card .rsvp-submit {
-    margin-top: 8px;
-  }
-
-  .rsvp-form-card .form-footnote {
-    margin-top: auto;
-  }
-
-  .rsvp-form-card .form-status {
-    margin-top: 10px;
+    align-self: flex-stretch;
   }
 }
 
 @media (max-width: 991px) {
-  .rsvp-intro-card,
-  .rsvp-form-card {
+  .rsvp-card  {
     margin-bottom: 28px;
   }
 }
 
 @media (max-width: 480px) {
-  .rsvp-intro-card,
-  .rsvp-form-card {
+  .rsvp-card {
     padding: 24px;
   }
 
-  .rsvp-intro-card h2 {
+  .rsvp-card h2 {
     font-size: 40px;
   }
 
