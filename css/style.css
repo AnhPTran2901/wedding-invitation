@@ -23,13 +23,22 @@
   /* keep your lilac palette from earlier */
   --ink:       #9B68AE;
   --muted:      #B38EB5;
-  --paper:      #FBF7F8;
+  --paper:      #fdf9f4;
+  --paper-peony: rgba(239, 229, 239, 0.54);
+  --paper-ivory: rgba(252, 246, 239, 0.85);
+  --paper-shell: rgba(255, 253, 250, 0.97);
   --letter:     #E6A0A9;
   --letter2:    #3e513e;
-  --border:     #e6dff5;   /* card border */
+  --border:    rgba(205, 189, 210, 0.38);   /* card border */
+  --shell-shadow: 0 40px 90px -72px rgba(74, 53, 92, 0.34);
+  --panel-shadow: 0 24px 60px -48px rgba(74, 53, 92, 0.28);
   --accent:     #AE9AB2;   /* primary lilac */
   --accent-2:   #AA7FA0;   /* lighter lilac */
-  --accent-ink: #ffffff;   /* text on lilac */
+  --accent-ink: #ffffff;   /* text on accent */
+  --shell-shadow: 0 40px 90px -72px rgba(74, 53, 92, 0.34);
+  --panel-shadow: 0 24px 60px -48px rgba(74, 53, 92, 0.28);
+  --section-gradient-1: linear-gradient(180deg, var(--paper-shell) 0%, rgba(245, 239, 252, 0.82) 100%);
+  --section-gradient-2: linear-gradient(180deg, rgba(253, 249, 244, 0.92) 0%, rgba(246, 238, 247, 0.85) 52%, rgba(240, 232, 246, 0.82) 100%);
 }
 
 /* 2.2 Global section spacing (even top/bottom) */
@@ -87,8 +96,15 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
-  color: #828282;
-  background: var(--paper);
+  color: var(--letter2);
+  background: var(--section-gradient-1);
+  background-image:
+    radial-gradient(170% 130% at 18% -12%, rgba(199, 184, 210, 0.22) 0%, rgba(253, 249, 244, 0) 68%),
+    radial-gradient(150% 140% at 82% -6%, rgba(236, 214, 223, 0.2) 0%, rgba(253, 249, 244, 0) 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(253, 249, 244, 1) 100%);
+  background-repeat: no-repeat;
+  background-size: 130% 115%, 125% 115%, 100% 100%;
+  background-attachment: fixed;;
 }
 
 #page {
@@ -119,13 +135,13 @@ body {
 }
 
 a {
-  color: #2E86AB;
+  color: var(--accent-2);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #2E86AB;
+  color: var(--accent);
   outline: none;
   text-decoration: none;
 }
@@ -135,7 +151,7 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6, figure {
-  color: #000;
+  color: var(--ink);
   font-family: "Work Sans", Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 20px 0;
@@ -143,22 +159,22 @@ h1, h2, h3, h4, h5, h6, figure {
 
 ::-webkit-selection {
 color: #fff;
-  background: var(--muted);
+  background: var(--accent);
 }
 
 ::-moz-selection {
   color: #fff;
-  background: var(--muted);
+  background: var(--accent);
 }
 
 ::-moz-selection {
   color: #fff;
-  background: var(--muted);
+  background: var(--accent);
 }
 
 ::selection {
   color: #fff;
-  background: var(--muted);
+  background: var(--accent);
 }
 
 .fh5co-nav {
@@ -169,10 +185,18 @@ color: #fff;
   width: 100%;
   padding: 40px 0;
   z-index: 1001;
+  /* background: linear-gradient(120deg, rgba(255, 255, 255, 0.78) 0%, rgba(244, 239, 250, 0.62) 100%);
+  border: none;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  box-shadow: 0 18px 48px -30px rgba(72, 52, 92, 0.34);
+  backdrop-filter: blur(12px) */
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav {
     padding: 20px 0;
+/*     border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px; */
   }
 }
 .fh5co-nav #fh5co-logo {
@@ -181,10 +205,11 @@ color: #fff;
   padding: 0;
   line-height: 40px;
   font-family: "Sacramento", Arial, serif;
+  color: var(--accent-2);
 }
 .fh5co-nav a {
   padding: 5px 10px;
-  color: var(--muted);
+  color: var(--ink);
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav .menu-1, .fh5co-nav .menu-2 {
@@ -205,13 +230,13 @@ color: #fff;
   font-size: 14px;
   padding: 30px 10px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 .fh5co-nav ul li a:hover, .fh5co-nav ul li a:focus, .fh5co-nav ul li a:active {
-  color: var(--muted);
+  color: var(--ink);
 }
 .fh5co-nav ul li.has-dropdown {
   position: relative;
@@ -276,7 +301,7 @@ color: #fff;
   color: #F14E95;
 }
 .fh5co-nav ul li.btn-cta a span {
-  background: #ffff;
+  background: var(--accent);
   padding: 4px 20px;
   display: -moz-inline-stack;
   display: inline-block;
@@ -289,11 +314,14 @@ color: #fff;
   -moz-border-radius: 100px;
   -ms-border-radius: 100px;
   border-radius: 100px;
+  box-shadow: 0 12px 28px -18px rgba(177, 111, 144, 0.55);
 }
 .fh5co-nav ul li.btn-cta a:hover span {
-  -webkit-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75); */
+  background: var(--accent-2);
+  box-shadow: 0 16px 32px -18px rgba(177, 111, 144, 0.6);
 }
 .fh5co-nav ul li.active > a {
   color: var(--muted) !important;
@@ -313,6 +341,30 @@ color: #fff;
   width: 100%;
   float: left;
   position: relative;
+}
+
+
+#fh5co-couple,
+#fh5co-couple-story,
+#fh5co-gallery,
+#fh5co-testimonial,
+#fh5co-map,
+#fh5co-counter,
+#fh5co-event,
+#fh5co-rsvp {
+  position: relative;
+  background: var(--section-gradient-1);
+  box-shadow:
+    var(--shell-shadow),
+    inset 0 38px 90px -74px rgba(197, 180, 209, 0.42),
+    inset 0 -34px 84px -72px rgba(235, 222, 236, 0.44);
+}
+
+/* Shared lavender wash for the invitation suite, then alternating lavender panels down the page */
+#fh5co-event,
+#fh5co-gallery,
+#fh5co-map {
+  background: var(--section-gradient-2);
 }
 
 .fh5co-video {
