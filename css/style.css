@@ -98,13 +98,14 @@ body {
   line-height: 1.7;
   color: var(--letter2);
   background: var(--section-gradient-1);
-  background-image:
+  /* background-image:
     radial-gradient(170% 130% at 18% -12%, rgba(199, 184, 210, 0.22) 0%, rgba(253, 249, 244, 0) 68%),
     radial-gradient(150% 140% at 82% -6%, rgba(236, 214, 223, 0.2) 0%, rgba(253, 249, 244, 0) 70%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(253, 249, 244, 1) 100%);
   background-repeat: no-repeat;
   background-size: 130% 115%, 125% 115%, 100% 100%;
-  background-attachment: fixed;;
+  background-attachment: fixed;; */
+   background-attachment: fixed;
 }
 
 #page {
@@ -115,6 +116,7 @@ body {
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  background: var(--section-gradient-1);
 }
 .offcanvas #page {
   overflow: hidden;
@@ -344,28 +346,7 @@ color: #fff;
 }
 
 
-#fh5co-couple,
-#fh5co-couple-story,
-#fh5co-gallery,
-#fh5co-testimonial,
-#fh5co-map,
-#fh5co-counter,
-#fh5co-event,
-#fh5co-rsvp {
-  position: relative;
-  background: var(--section-gradient-1);
-  box-shadow:
-    var(--shell-shadow),
-    inset 0 38px 90px -74px rgba(197, 180, 209, 0.42),
-    inset 0 -34px 84px -72px rgba(235, 222, 236, 0.44);
-}
 
-/* Shared lavender wash for the invitation suite, then alternating lavender panels down the page */
-#fh5co-event,
-#fh5co-gallery,
-#fh5co-map {
-  background: var(--section-gradient-2);
-}
 
 .fh5co-video {
   height: 450px;
@@ -514,7 +495,8 @@ color: #fff;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--paper);
+  background: transparent;
+  /* background: var(--section-gradient-1); */
 }
 @media screen and (max-width: 768px) {
   #fh5co-counter,
@@ -1165,10 +1147,10 @@ html { scroll-behavior: smooth; }
     padding: 3em 0;
   }
 }
-
+/* 
 .fh5co-section-gray {
   background: rgba(0, 0, 0, 0.04);
-}
+} */
 
 .couple-wrap {
   width: 90%;
@@ -2013,7 +1995,7 @@ html { scroll-behavior: smooth; }
 .hero {
   padding: 80px 0 40px;
   text-align: center;
-  background: var(--paper); /* subtle paper tone; change or remove if you prefer transparent */
+  /* background: var(--section-gradient-1); subtle paper tone; change or remove if you prefer transparent */
 }
 
 .hero-illustration {
@@ -2078,7 +2060,6 @@ html { scroll-behavior: smooth; }
 
 /* Couple photo */
 .couple-photo { 
-  background: var(--paper); 
   margin-bottom: 5em; }
 .couple-photo-img {
   display:block; 
@@ -2824,4 +2805,32 @@ html { scroll-behavior: smooth; }
   .dot-nav {
     display: none;
   }
+}
+
+/* #fh5co-couple,
+#fh5co-couple-story,
+#fh5co-gallery,
+#fh5co-testimonial,
+#fh5co-map,
+#fh5co-counter,
+#fh5co-event,
+#fh5co-rsvp {
+  position: relative;
+  background: var(--section-gradient-1);
+  box-shadow:
+    var(--shell-shadow),
+    inset 0 38px 90px -74px rgba(197, 180, 209, 0.42),
+    inset 0 -34px 84px -72px rgba(235, 222, 236, 0.44);
+}
+
+/* Shared lavender wash for the invitation suite, then alternating lavender panels down the page */
+/* #fh5co-event,
+#fh5co-gallery,
+#fh5co-map {
+  background: var(--section-gradient-2);
+} */ */
+
+#page {
+  position: relative;
+  background: var(--section-gradient-1);
 }
