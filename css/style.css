@@ -2562,7 +2562,7 @@ html { scroll-behavior: smooth; }
 
 /* Each row: compact, centered line = time | icon | text */
 .event-schedule li{
-  display: inline-flex !important;   
+  display: inline-flex !important;   /* beat any old grid/flex rules */
   align-items: center;
   justify-content: center;
   gap: 12px;
