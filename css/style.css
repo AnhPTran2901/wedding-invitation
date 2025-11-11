@@ -1574,7 +1574,7 @@ html { scroll-behavior: smooth; }
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(251, 247, 248, 0.85);
+  background: rgba(251, 247, 248, 0.95);
 }
 #fh5co-rsvp .container {
   position: relative;
@@ -3052,12 +3052,12 @@ html { scroll-behavior: smooth; }
 /* ===== RESET: remove dark test panels (if present) ===== */
 #page > section,
 #page > div[id^="fh5co-"]{
-  background: transparent !important;
+  background-color: transparent !important;
   color: inherit !important;
 }
 #page > section .overlay,
 #page > div[id^="fh5co-"] .overlay{
-  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* ===== LILAC BACKGROUND (global) ===== */
@@ -3086,14 +3086,12 @@ body{
 #fh5co-event,
 #fh5co-couple-story,
 #fh5co-gallery,
-#fh5co-map,
-#fh5co-rsvp{
-  background: transparent !important;
+#fh5co-map{
+  background-color: transparent !important;
 }
 
 /* Optional: soften overlays on image sections so gradient still peeks through */
 #fh5co-event .overlay{ background: rgba(255,255,255,0.0) !important; }
-#fh5co-rsvp .overlay{  background: rgba(251, 247, 248, 0.85) !important; } 
 
 /* --- OPTION C: Dusty-Blue Linen (cool contrast) --- */
 #fh5co-couple-story.bg-story-blue{
