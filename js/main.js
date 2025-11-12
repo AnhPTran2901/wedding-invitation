@@ -83,22 +83,36 @@
 
 
 	// New: IO-based fade-in (replaces old Waypoints logic)
+	// New: IO-based fade-in (keeps legacy effect names)
 	var contentWayPoint = function () {
 		var els = document.querySelectorAll('.animate-box');
 		if (!els.length) return;
+
+		// Detect Animate.css major version by probing a well-known v4 class
+		var supportsV4 = !!document.createElement('div').classList;
+
+		// Helper to apply classes in a version-agnostic way
+		function applyAnimateClasses(el, effect) {
+			// Legacy v3 classes
+			el.classList.add('animated', 'animated-fast', effect);
+
+			// v4 classes (prefixed with animate__)
+			el.classList.add('animate__animated', 'animate__' + effect);
+		}
 
 		// Fallback: show immediately on very old browsers
 		if (!('IntersectionObserver' in window)) {
 			els.forEach(function (el) {
 			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-			el.classList.add('animated-fast', effect);
+			applyAnimateClasses(el, effect);
+			// ensure visible after classes are applied
 			el.style.opacity = '1';
 			el.style.transform = 'none';
 			});
 			return;
 		}
 
-		// Start hidden (JS only)
+		// Ensure initial hidden state (in case CSS didn’t load yet)
 		els.forEach(function (el) {
 			el.style.opacity = '0';
 			el.style.transform = 'translateY(12px)';
@@ -110,19 +124,22 @@
 
 			var el = entry.target;
 			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-			el.classList.add('animated-fast', effect);
+
+			applyAnimateClasses(el, effect);
+
+			// in case a custom CSS transition is present, make sure it ends visible
 			el.style.opacity = '1';
 			el.style.transform = 'none';
-			obs.unobserve(el); // only once
+
+			obs.unobserve(el); // animate once
 			});
 		}, {
-			threshold: 0.18,              // ~18% visible
-			rootMargin: '0px 0px -10% 0px'  // nudge to avoid early triggers
+			threshold: 0.18,
+			rootMargin: '0px 0px -10% 0px'  // must include 'px' or '%'
 		});
 
 		els.forEach(function (el) { io.observe(el); });
-		};
-
+	};
 
 
 	var dropdown = function() {
