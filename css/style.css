@@ -2034,7 +2034,10 @@ html.js .animate-box{
   transition: opacity .6s ease, transform .6s ease; /* smooth reveal */
 }
 
-
+/* Directional offsets that match your legacy names */
+html.js .animate-box[data-animate-effect="fadeInLeft"]  { transform: translateX(-12px); }
+html.js .animate-box[data-animate-effect="fadeInRight"] { transform: translateX(12px);  }
+html.js .animate-box[data-animate-effect="fadeIn"]      { transform: none; }
 /* When JS marks as visible */
 html.js .animate-box.in-view{
   opacity: 1;
