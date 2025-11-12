@@ -82,41 +82,47 @@
 
 
 
-	// var contentWayPoint = function() {
-	// 	var i = 0;
-	// 	$('.animate-box').waypoint( function( direction ) {
+	// New: IO-based fade-in (replaces old Waypoints logic)
+	var contentWayPoint = function () {
+		var els = document.querySelectorAll('.animate-box');
+		if (!els.length) return;
 
-	// 		if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
-	// 			i++;
+		// Fallback: show immediately on very old browsers
+		if (!('IntersectionObserver' in window)) {
+			els.forEach(function (el) {
+			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+			el.classList.add('animated-fast', effect);
+			el.style.opacity = '1';
+			el.style.transform = 'none';
+			});
+			return;
+		}
 
-	// 			$(this.element).addClass('item-animate');
-	// 			setTimeout(function(){
+		// Start hidden (JS only)
+		els.forEach(function (el) {
+			el.style.opacity = '0';
+			el.style.transform = 'translateY(12px)';
+		});
 
-	// 				$('body .animate-box.item-animate').each(function(k){
-	// 					var el = $(this);
-	// 					setTimeout( function () {
-	// 						var effect = el.data('animate-effect');
-	// 						if ( effect === 'fadeIn') {
-	// 							el.addClass('fadeIn animated-fast');
-	// 						} else if ( effect === 'fadeInLeft') {
-	// 							el.addClass('fadeInLeft animated-fast');
-	// 						} else if ( effect === 'fadeInRight') {
-	// 							el.addClass('fadeInRight animated-fast');
-	// 						} else {
-	// 							el.addClass('fadeInUp animated-fast');
-	// 						}
+		var io = new IntersectionObserver(function (entries, obs) {
+			entries.forEach(function (entry) {
+			if (!entry.isIntersecting) return;
 
-	// 						el.removeClass('item-animate');
-	// 					},  k * 200, 'easeInOutExpo' );
-	// 				});
-					
-	// 			}, 100);
-				
-	// 		}
+			var el = entry.target;
+			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+			el.classList.add('animated-fast', effect);
+			el.style.opacity = '1';
+			el.style.transform = 'none';
+			obs.unobserve(el); // only once
+			});
+		}, {
+			threshold: 0.18,              // ~18% visible
+			rootMargin: '0px 0px -10% 0'  // nudge to avoid early triggers
+		});
 
-	// 	} , { offset: '65%' } );
-	// };
+		els.forEach(function (el) { io.observe(el); });
+		};
+
 
 
 	var dropdown = function() {
@@ -196,17 +202,28 @@
 		});
 	};
 
-	var counterWayPoint = function() {
-		if ($('#fh5co-counter').length > 0 ) {
-			$('#fh5co-counter').waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);					
-					$(this.element).addClass('animated');
-				}
-			} , { offset: '90%' } );
+	var counterWayPoint = function () {
+		var el = document.getElementById('fh5co-counter');
+		if (!el) return;
+
+		if (!('IntersectionObserver' in window)) {
+			setTimeout(counter, 400);
+			el.classList.add('animated');
+			return;
 		}
-	};
+
+		var io = new IntersectionObserver(function (entries, obs) {
+			entries.forEach(function (entry) {
+			if (!entry.isIntersecting) return;
+			setTimeout(counter, 400);
+			el.classList.add('animated');
+			obs.unobserve(el);
+			});
+		}, { threshold: 0.25 });
+
+		io.observe(el);
+		};
+
 
 	// Parallax
 	var parallax = function() {
@@ -219,26 +236,26 @@
 		parallax();
 		offcanvasMenu();
 		burgerMenu();
-		// contentWayPoint();
+		contentWayPoint();
 		dropdown();
 		testimonialCarousel();
 		goToTop();
 		loaderPage();
-		counter();
+		// counter();
 		counterWayPoint();
 	});
 
 	// After full page (including images) has loaded, recalculate waypoints
-	window.addEventListener('load', function () {
-		// Waypoints 4.x global refresh
-		if (window.Waypoint && typeof Waypoint.refreshAll === 'function') {
-			Waypoint.refreshAll();
-		}
-		// Fallback for older jQuery Waypoints
-		else if (window.jQuery && jQuery.waypoints) {
-			jQuery.waypoints('refresh');
-		}
-		});
+	// window.addEventListener('load', function () {
+	// 	// Waypoints 4.x global refresh
+	// 	if (window.Waypoint && typeof Waypoint.refreshAll === 'function') {
+	// 		Waypoint.refreshAll();
+	// 	}
+	// 	// Fallback for older jQuery Waypoints
+	// 	else if (window.jQuery && jQuery.waypoints) {
+	// 		jQuery.waypoints('refresh');
+	// 	}
+	// 	});
 
 
 

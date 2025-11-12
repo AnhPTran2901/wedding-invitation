@@ -4,7 +4,6 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
-<html class="no-js" lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -997,44 +996,6 @@ function initScrollSpyNav() {
 
 onDocumentReady(initScrollSpyNav);
 onDocumentReady(initRsvpForm);
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var els = document.querySelectorAll('.animate-box');
-
-  if (!('IntersectionObserver' in window)) {
-    els.forEach(function (el) {
-      var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-      el.classList.add('animated-fast', effect);
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
-    return;
-  }
-
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var observer = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-
-      var el = entry.target;
-      var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
-
-      el.classList.add('animated-fast', effect);
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-
-      obs.unobserve(el);  // animate once
-    });
-  }, {
-    threshold: 0.2,
-    rootMargin: '0px 0px -10%'
-  });
-
-  els.forEach(function (el) { observer.observe(el); });
-});
 </script>
 
 </body>
