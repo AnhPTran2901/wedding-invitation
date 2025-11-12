@@ -3574,5 +3574,50 @@ body{
   opacity: 1 !important; 
   transform: none !important; 
 }
+/* ===== MOBILE: left-align text inside event cards ===== */
+@media (max-width: 768px){
+  /* make the card’s text flush-left */
+  #fh5co-event .event-wrap,
+  #fh5co-event .event-wrap h3,
+  #fh5co-event .event-wrap p,
+  #fh5co-event .event-wrap span,
+  #fh5co-event .event-wrap li{
+    text-align: left;
+  }
+
+  /* schedule list: switch to a neat grid */
+  .event-schedule{
+    width: 100%;
+    margin: var(--space-3) 0 0;
+    text-align: left;           /* override center */
+  }
+
+  .event-schedule li{
+    display: grid !important;   /* replace inline-flex on mobile */
+    grid-template-columns: 90px 22px 1fr;  /* time | icon | text */
+    align-items: start;
+    gap: 10px;
+    padding: 10px 0;
+    white-space: normal;        /* allow wrapping of long lines */
+    justify-content: unset;
+  }
+
+  .event-schedule .time{
+    min-width: 0;               /* let the grid control width */
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .ico-png{
+    justify-self: center;       /* keep icon nicely centered in its column */
+    align-self: start;
+    display: inline-block !important;
+  }
+
+  .event-schedule .desc{
+    grid-column: 3;             /* ensure text sits in the last column */
+    line-height: 1.6;
+  }
+}
 
 
