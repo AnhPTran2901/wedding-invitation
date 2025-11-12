@@ -3446,6 +3446,26 @@ body{
   #invite-line .fh5co-heading h2 {
     font-size: 34px;
   }
+
+  /* Stop using flex row on small screens */
+  #save-the-date .row {
+    display: block;
+    gap: 0;
+  }
+
+  /* Each card takes full width, stacked neatly */
+  #save-the-date .col-md-6 {
+    display: block;
+    flex: none;
+    width: 100%;
+    margin-bottom: 24px;  /* space between the two cards */
+  }
+
+  /* Let the cards size themselves naturally */
+  #save-the-date .std-card {
+    height: auto;
+    padding: 24px 24px;   /* same padding both cards */
+  }
 }
 
 /* === Mobile fixes for gallery overflow === */
