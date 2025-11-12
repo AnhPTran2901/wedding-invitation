@@ -86,68 +86,73 @@
 	// New: IO-based fade-in (keeps legacy effect names)
 	var contentWayPoint = function () {
 		var els = document.querySelectorAll('.animate-box');
-		if (!els.length) return;
+			if (!els.length) return;
 
-		// Detect Animate.css major version by probing a well-known v4 class
-		var supportsV4 = !!document.createElement('div').classList;
+			var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		// Helper to apply classes in a version-agnostic way
-		function applyAnimateClasses(el, effect) {
-			// Legacy v3 classes
-			el.classList.add('animated', 'animated-fast', effect);
-
-			// v4 classes (prefixed with animate__)
-			el.classList.add('animate__animated', 'animate__' + effect);
-		}
-		 // Respect reduced motion
-  		var prefersReduced = window.matchMedia &&
-                       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-		// Fallback: show immediately on very old browsers
-		if (!('IntersectionObserver' in window)) {
-			els.forEach(function (el) {
-			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-			if (!prefersReduced) applyAnimateClasses(el, effect);
-			// ensure visible after classes are applied
-			el.classList.add('in-view'); 
-			el.style.opacity = '1';
-			el.style.transform = 'none';
-			});
-			return;
-		}
-
-		 els.forEach(function (el) {
-			el.style.opacity = '0';
-			// baseline offset (directional offsets come from CSS data-attr rules)
-			if (!el.hasAttribute('data-animate-effect') ||
-				el.getAttribute('data-animate-effect') === 'fadeInUp') {
-			el.style.transform = 'translateY(12px)';
-			}
-  		});
-
-		var io = new IntersectionObserver(function (entries, obs) {
+		// --- Main observer for .animate-box ---
+		if ('IntersectionObserver' in window) {
+    	var io = new IntersectionObserver(function (entries, obs) {
 			entries.forEach(function (entry) {
-			if (!entry.isIntersecting) return;
+				if (!entry.isIntersecting) return;
 
-			var el = entry.target;
-			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+				var el = entry.target;
+				var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
 
-			if (!prefersReduced) applyAnimateClasses(el, effect);
+				// Show it: works with your CSS (opacity/transform via .in-view)
+				el.classList.add('in-view', 'animated-fast');
 
-			el.classList.add('in-view');
+				// Optional: if animate.css is present, these keep legacy names working
+				// (safe even if animate.css isn't loaded)
+				if (effect) {
+				el.classList.add(effect);                       // v3 name
+				el.classList.add('animate__animated', 'animate__' + effect); // v4 names
+				}
 
-			// in case a custom CSS transition is present, make sure it ends visible
-			el.style.opacity = '1';
-			el.style.transform = 'none';
+				// Clear any inline hiding that might linger
+				el.style.opacity = '';
+				el.style.transform = '';
 
-			obs.unobserve(el); // animate once
+				obs.unobserve(el);
 			});
-		}, {
-			threshold: 0.18,
-			rootMargin: '0px 0px -10% 0px'  // must include 'px' or '%'
-		});
+		}, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
 
 		els.forEach(function (el) { io.observe(el); });
+		} else {
+			// Fallback: reveal immediately
+			els.forEach(function (el) {
+			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+			el.classList.add('in-view', 'animated-fast', effect, 'animate__animated', 'animate__' + effect);
+			el.style.opacity = '1';
+			el.style.transform = 'none';
+			});
+		}
+
+		// --- Duo cards: add .is-visible so inner <img> animations run ---
+		(function observeDuoCards(){
+			var duoEls = document.querySelectorAll('.album-item--duo');
+			if (!duoEls.length || !('IntersectionObserver' in window)) return;
+
+			var duoIO = new IntersectionObserver(function (entries, obs) {
+			entries.forEach(function (e) {
+				if (!e.isIntersecting) return;
+				e.target.classList.add('is-visible');
+				obs.unobserve(e.target);
+			});
+			}, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+
+			duoEls.forEach(function (el) { duoIO.observe(el); });
+		})();
+
+		// --- Safety net: once images/grid are fully laid out, reveal onscreen tiles ---
+		window.addEventListener('load', function () {
+			document.querySelectorAll('#fh5co-gallery .animate-box').forEach(function (el) {
+			var r = el.getBoundingClientRect();
+			if (r.top < window.innerHeight * 0.9 && r.bottom > 0) {
+				el.classList.add('in-view');
+			}
+			});
+		});
 	};
 
 
@@ -229,41 +234,34 @@
 	};
 
 	// IntersectionObserver-based fade-in that preserves legacy effect names
-	var contentWayPoint = function () {
-  		var els = document.querySelectorAll('.animate-box');
-			if (!els.length) return;
+	// Trigger the number counters when the counter section enters view
+	var counterWayPoint = function () {
+		var el = document.getElementById('fh5co-counter');
+		if (!el) return;
 
-			// Old browsers: reveal without animation (no inline styles)
-			if (!('IntersectionObserver' in window)) {
-				els.forEach(function (el) {
-				el.classList.add('in-view'); // end state
-				// If you want animate.css to still run once:
-				var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-				el.classList.add('animated-fast', effect);
-				});
-				return;
-			}
+		var started = false;
+		function startCounter() {
+			if (started) return;
+			started = true;
+			setTimeout(counter, 300);  // uses your existing counter() that calls .countTo()
+			el.classList.add('animated');
+		}
 
-		var io = new IntersectionObserver(function (entries, obs) {
+		if ('IntersectionObserver' in window) {
+			var io = new IntersectionObserver(function (entries, obs) {
 			entries.forEach(function (entry) {
-			if (!entry.isIntersecting) return;
-
-			var el = entry.target;
-			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-
-			// Toggle classes only — no inline opacity/transform
-			el.classList.add('in-view');            // triggers CSS transition end state
-			el.classList.add('animated-fast', effect); // keeps legacy animate.css names
-
-			obs.unobserve(el); // animate once
+				if (!entry.isIntersecting) return;
+				startCounter();
+				obs.unobserve(el);
 			});
-		}, {
-			threshold: 0.2,
-			rootMargin: '0px 0px -10% 0'
-		});
+			}, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
 
-		els.forEach(function (el) { io.observe(el); });
-			};
+			io.observe(el);
+		} else {
+			// Very old browsers: just start
+			startCounter();
+		}
+		};
 
 	// Parallax
 	var parallax = function() {
