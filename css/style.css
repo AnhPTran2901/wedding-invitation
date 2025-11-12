@@ -2498,7 +2498,7 @@ html.js .animate-box.in-view{
   margin:0;
   font-family: "Allison", cursive;
   font-weight:700;
-  font-size: clamp(25px, 3vw, 30px);
+  font-size:clamp(40px, 5vw, 64px);
   letter-spacing:.02em;
   color: var(--letter);
   text-align:center;
