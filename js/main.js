@@ -115,7 +115,7 @@
 				
 			}
 
-		} , { offset: '85%' } );
+		} , { offset: '65%' } );
 	};
 
 
@@ -227,6 +227,19 @@
 		counter();
 		counterWayPoint();
 	});
+
+	// After full page (including images) has loaded, recalculate waypoints
+	window.addEventListener('load', function () {
+		// Waypoints 4.x global refresh
+		if (window.Waypoint && typeof Waypoint.refreshAll === 'function') {
+			Waypoint.refreshAll();
+		}
+		// Fallback for older jQuery Waypoints
+		else if (window.jQuery && jQuery.waypoints) {
+			jQuery.waypoints('refresh');
+		}
+		});
+
 
 
 }());
