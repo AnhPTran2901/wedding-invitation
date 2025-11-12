@@ -202,28 +202,42 @@
 		});
 	};
 
-	var counterWayPoint = function () {
-		var el = document.getElementById('fh5co-counter');
-		if (!el) return;
+	// IntersectionObserver-based fade-in that preserves legacy effect names
+	var contentWayPoint = function () {
+  		var els = document.querySelectorAll('.animate-box');
+			if (!els.length) return;
 
-		if (!('IntersectionObserver' in window)) {
-			setTimeout(counter, 400);
-			el.classList.add('animated');
-			return;
-		}
+			// Old browsers: reveal without animation (no inline styles)
+			if (!('IntersectionObserver' in window)) {
+				els.forEach(function (el) {
+				el.classList.add('in-view'); // end state
+				// If you want animate.css to still run once:
+				var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+				el.classList.add('animated-fast', effect);
+				});
+				return;
+			}
 
 		var io = new IntersectionObserver(function (entries, obs) {
 			entries.forEach(function (entry) {
 			if (!entry.isIntersecting) return;
-			setTimeout(counter, 400);
-			el.classList.add('animated');
-			obs.unobserve(el);
+
+			var el = entry.target;
+			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+
+			// Toggle classes only — no inline opacity/transform
+			el.classList.add('in-view');            // triggers CSS transition end state
+			el.classList.add('animated-fast', effect); // keeps legacy animate.css names
+
+			obs.unobserve(el); // animate once
 			});
-		}, { threshold: 0.25 });
+		}, {
+			threshold: 0.2,
+			rootMargin: '0px 0px -10% 0'
+		});
 
-		io.observe(el);
-		};
-
+		els.forEach(function (el) { io.observe(el); });
+			};
 
 	// Parallax
 	var parallax = function() {
