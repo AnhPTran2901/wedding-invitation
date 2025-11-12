@@ -99,24 +99,31 @@
 			// v4 classes (prefixed with animate__)
 			el.classList.add('animate__animated', 'animate__' + effect);
 		}
+		 // Respect reduced motion
+  		var prefersReduced = window.matchMedia &&
+                       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		// Fallback: show immediately on very old browsers
 		if (!('IntersectionObserver' in window)) {
 			els.forEach(function (el) {
 			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-			applyAnimateClasses(el, effect);
+			if (!prefersReduced) applyAnimateClasses(el, effect);
 			// ensure visible after classes are applied
+			el.classList.add('in-view'); 
 			el.style.opacity = '1';
 			el.style.transform = 'none';
 			});
 			return;
 		}
 
-		// Ensure initial hidden state (in case CSS didn’t load yet)
-		els.forEach(function (el) {
+		 els.forEach(function (el) {
 			el.style.opacity = '0';
+			// baseline offset (directional offsets come from CSS data-attr rules)
+			if (!el.hasAttribute('data-animate-effect') ||
+				el.getAttribute('data-animate-effect') === 'fadeInUp') {
 			el.style.transform = 'translateY(12px)';
-		});
+			}
+  		});
 
 		var io = new IntersectionObserver(function (entries, obs) {
 			entries.forEach(function (entry) {
@@ -125,7 +132,9 @@
 			var el = entry.target;
 			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
 
-			applyAnimateClasses(el, effect);
+			if (!prefersReduced) applyAnimateClasses(el, effect);
+
+			el.classList.add('in-view');
 
 			// in case a custom CSS transition is present, make sure it ends visible
 			el.style.opacity = '1';
