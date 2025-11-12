@@ -2023,10 +2023,10 @@ html { scroll-behavior: smooth; }
 }
 
 /* Fade/slide baseline: start hidden only when JS is enabled */
-html.js .animate-box{
+.animate-box.will-animate{
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity .6s ease, transform .6s ease; /* smooth reveal */
+  transition: opacity .6s ease, transform .6s ease;
 }
 
 /* Directional offsets that match your legacy names */
@@ -2035,6 +2035,12 @@ html.js .animate-box[data-animate-effect="fadeInRight"] { transform: translateX(
 html.js .animate-box[data-animate-effect="fadeIn"]      { transform: none; }
 /* When JS marks as visible */
 html.js .animate-box.in-view{
+  opacity: 1;
+  transform: none;
+}
+
+/* Already visible */
+.animate-box.in-view{
   opacity: 1;
   transform: none;
 }
@@ -3036,9 +3042,20 @@ html.js .animate-box.in-view{
 }
 
 /* Starting states for entrance */
-.album-item--duo img {
-  opacity: 0;
+/* default: images are visible */
+.album-item--duo img { 
+  opacity: 1; 
+}
+
+/* hide only while the card is flagged to animate */
+.album-item--duo.will-animate img { 
+  opacity: 0; 
   will-change: transform, opacity;
+}
+
+/* belt-and-suspenders: once visible, force shown */
+.album-item--duo.is-visible img { 
+  opacity: 1; 
 }
 
 /* Animate only after the card becomes visible (JS toggles .is-visible) */

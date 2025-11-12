@@ -86,75 +86,90 @@
 	// New: IO-based fade-in (keeps legacy effect names)
 	var contentWayPoint = function () {
 		var els = document.querySelectorAll('.animate-box');
-			if (!els.length) return;
+		if (!els.length) return;
 
-			var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		// --- Main observer for .animate-box ---
-		if ('IntersectionObserver' in window) {
-    	var io = new IntersectionObserver(function (entries, obs) {
-			entries.forEach(function (entry) {
-				if (!entry.isIntersecting) return;
+		// Make hiding opt-in (prevents being stuck invisible if JS races)
+		els.forEach(function (el) { el.classList.add('will-animate'); });
 
-				var el = entry.target;
-				var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
+		function reveal(el){
+			var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
+				el.classList.remove('will-animate');
+				el.classList.add('in-view','animated-fast');
 
-				// Show it: works with your CSS (opacity/transform via .in-view)
-				el.classList.add('in-view', 'animated-fast');
+				// Animate.css v3 names (safe even if not loaded)
+				el.classList.add('animated');
+				if (effect) el.classList.add(effect);
 
-				// Optional: if animate.css is present, these keep legacy names working
-				// (safe even if animate.css isn't loaded)
-				if (effect) {
-				el.classList.add(effect);                       // v3 name
-				el.classList.add('animate__animated', 'animate__' + effect); // v4 names
-				}
+				// Animate.css v4 names (harmless if not present)
+				el.classList.add('animate__animated');
+				if (effect) el.classList.add('animate__' + effect);
 
-				// Clear any inline hiding that might linger
 				el.style.opacity = '';
 				el.style.transform = '';
+			}
 
-				obs.unobserve(el);
+		// Duo cards (two stacked images)
+		(function observeDuo(){
+			var duoEls = document.querySelectorAll('.album-item--duo');
+			if (!duoEls.length || !('IntersectionObserver' in window)) return;
+			// mark as "will animate" so CSS can start them transparent
+  			duoEls.forEach(function(el){ el.classList.add('will-animate'); });
+
+			var duoIO = new IntersectionObserver(function(entries, obs){
+				entries.forEach(function(e){
+					if (!e.isIntersecting) return;
+					e.target.classList.add('is-visible'); // triggers your slideIn keyframes
+					obs.unobserve(e.target);
+				});
+				}, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+				duoEls.forEach(function(el){ duoIO.observe(el); });
+			})();
+
+		var io = null;
+		if ('IntersectionObserver' in window){
+			io = new IntersectionObserver(function(entries, obs){
+			entries.forEach(function(entry){
+				if (!entry.isIntersecting) return;
+				reveal(entry.target);
+				obs.unobserve(entry.target);
 			});
-		}, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+			}, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
 
-		els.forEach(function (el) { io.observe(el); });
+			els.forEach(function(el){ io.observe(el); });
 		} else {
-			// Fallback: reveal immediately
-			els.forEach(function (el) {
-			var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
-			el.classList.add('in-view', 'animated-fast', effect, 'animate__animated', 'animate__' + effect);
-			el.style.opacity = '1';
-			el.style.transform = 'none';
+			// Old browsers: just show them
+			els.forEach(reveal);
+		}
+
+		// Kick-start anything already on screen (first load)
+		function kickstartVisible(){
+			var vh = window.innerHeight || document.documentElement.clientHeight;
+			document.querySelectorAll('.animate-box').forEach(function(el){
+			var r = el.getBoundingClientRect();
+			if (r.top < vh * 0.9 && r.bottom > 0){
+				reveal(el);
+				if (io) io.unobserve(el);
+			}
+			});
+			document.querySelectorAll('.album-item--duo').forEach(function(el){
+			var r = el.getBoundingClientRect();
+			if (r.top < vh * 0.9 && r.bottom > 0){
+				el.classList.remove('will-animate');
+				el.classList.add('is-visible');
+			}
 			});
 		}
 
-		// --- Duo cards: add .is-visible so inner <img> animations run ---
-		(function observeDuoCards(){
-			var duoEls = document.querySelectorAll('.album-item--duo');
-			if (!duoEls.length || !('IntersectionObserver' in window)) return;
-
-			var duoIO = new IntersectionObserver(function (entries, obs) {
-			entries.forEach(function (e) {
-				if (!e.isIntersecting) return;
-				e.target.classList.add('is-visible');
-				obs.unobserve(e.target);
-			});
-			}, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
-
-			duoEls.forEach(function (el) { duoIO.observe(el); });
-		})();
-
-		// --- Safety net: once images/grid are fully laid out, reveal onscreen tiles ---
-		window.addEventListener('load', function () {
-			document.querySelectorAll('#fh5co-gallery .animate-box').forEach(function (el) {
-			var r = el.getBoundingClientRect();
-			if (r.top < window.innerHeight * 0.9 && r.bottom > 0) {
-				el.classList.add('in-view');
-			}
-			});
-		});
-	};
-
+		// Run now, and after full load (covers fonts/images delaying layout)
+		kickstartVisible();
+		if (document.readyState === 'complete'){
+			setTimeout(kickstartVisible, 0);
+		} else {
+			window.addEventListener('load', function(){ setTimeout(kickstartVisible, 0); }, { once:true });
+		}
+		};
 
 	var dropdown = function() {
 
@@ -237,30 +252,47 @@
 	// Trigger the number counters when the counter section enters view
 	var counterWayPoint = function () {
 		var el = document.getElementById('fh5co-counter');
-		if (!el) return;
+			if (!el) return;
 
-		var started = false;
-		function startCounter() {
-			if (started) return;
-			started = true;
-			setTimeout(counter, 300);  // uses your existing counter() that calls .countTo()
-			el.classList.add('animated');
-		}
+			function startCounter(){
+				if (typeof $ === 'function' && $('.js-counter').countTo){
+				$('.js-counter').countTo({
+					formatter: function (value, options) { return value.toFixed(options.decimals); }
+				});
+				}
+				el.classList.add('animated');
+			}
 
-		if ('IntersectionObserver' in window) {
+			if (!('IntersectionObserver' in window)) {
+				// old browsers: start after a brief delay
+				setTimeout(startCounter, 400);
+				return;
+			}
+
 			var io = new IntersectionObserver(function (entries, obs) {
-			entries.forEach(function (entry) {
+				entries.forEach(function (entry) {
 				if (!entry.isIntersecting) return;
-				startCounter();
-				obs.unobserve(el);
-			});
-			}, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+				setTimeout(startCounter, 400);
+				obs.unobserve(entry.target);
+				});
+			}, { threshold: 0.25 });
 
 			io.observe(el);
-		} else {
-			// Very old browsers: just start
-			startCounter();
-		}
+
+			// If page already loaded and the counter is visible, kick it
+			if (document.readyState === 'complete'){
+				var r = el.getBoundingClientRect();
+				if (r.top < (window.innerHeight || 0) && r.bottom > 0) {
+				setTimeout(startCounter, 0);
+				}
+			} else {
+				window.addEventListener('load', function(){
+				var r2 = el.getBoundingClientRect();
+				if (r2.top < (window.innerHeight || 0) && r2.bottom > 0) {
+					setTimeout(startCounter, 0);
+				}
+				}, { once:true });
+			}
 		};
 
 	// Parallax
