@@ -117,7 +117,7 @@
 			});
 		}, {
 			threshold: 0.18,              // ~18% visible
-			rootMargin: '0px 0px -10% 0'  // nudge to avoid early triggers
+			rootMargin: '0px 0px -10% 0px'  // nudge to avoid early triggers
 		});
 
 		els.forEach(function (el) { io.observe(el); });
