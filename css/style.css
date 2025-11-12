@@ -2314,6 +2314,10 @@ html.js .animate-box.in-view{
   box-shadow: 0 22px 42px rgba(45, 37, 24, 0.24);
 }
 
+.rsvp-alt:hover,
+.rsvp-alt:focus,
+.rsvp-alt:active { color: #fff !important; }
+
 .rsvp-form-title {
   font-size: 26px;
   margin-bottom: 24px;
@@ -3547,17 +3551,28 @@ body{
   }
 }
 .made-with-love{
-  margin: 28px auto 18px;
-  max-width: 860px;
-  padding: 12px 16px;
+  padding: 28px 16px;
   text-align: center;
-  font-size: 13px;
-  color: var(--letter2);
-  background: var(--paper);
-  border: 1px dashed var(--border);
-  border-radius: 999px;
-  box-shadow: 0 10px 24px rgba(155,106,142,.10);
+  border-top: 1px solid var(--border);
+  background: transparent;
 }
-.made-with-love .sep{ opacity:.55; margin: 0 .6em; }
-.made-with-love .heart{ margin: 0 .25em; }
+.made-with-love p{
+  margin: 0;
+  font-size: 14px;
+  color: var(--letter2);
+}
+.made-with-love .sep{ margin: 0 10px; opacity: .7; }
+
+.inline-heart{
+  display: inline-block;
+  transform: translateY(1px);
+  animation: pulse .9s ease-in-out infinite;
+}
+
+/* belt-and-braces: if you keep animate-box by accident, don’t hide footer */
+.made-with-love.will-animate{ 
+  opacity: 1 !important; 
+  transform: none !important; 
+}
+
 
