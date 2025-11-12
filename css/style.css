@@ -3620,4 +3620,29 @@ body{
   }
 }
 
+/* Make the schedule start *below* the floated .event-col blocks */
+.event-wrap .event-schedule{
+  clear: both;                 /* <-- key fix */
+  margin-top: 10px;            /* optional breathing room */
+}
+
+/* Mobile: force consistent 3-column alignment for every row */
+@media (max-width: 768px){
+  .event-schedule{ text-align:left; }
+  .event-schedule > li{
+    display: grid !important;               /* override inline-flex */
+    grid-template-columns: 90px 22px 1fr;   /* time | icon | text */
+    align-items: start;
+    gap: 10px;
+    padding: 10px 0;
+    white-space: normal;
+  }
+  .event-schedule > li > *{
+    float:none !important;                  /* neutralize any legacy floats */
+    position:static !important;
+  }
+  .event-schedule .time{ font-weight:700; text-align:left; }
+  .event-schedule .ico-png{ justify-self:center; }
+  .event-schedule .desc{ line-height:1.6; }
+}
 
