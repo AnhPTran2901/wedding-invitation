@@ -2022,9 +2022,40 @@ html { scroll-behavior: smooth; }
   background: url(../images/loader.gif) center no-repeat #fff;
 }
 
-.js .animate-box {
+/* Fade/slide baseline: start hidden only when JS is enabled */
+.animate-box.will-animate{
   opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
 }
+
+/* Directional offsets that match your legacy names */
+html.js .animate-box[data-animate-effect="fadeInLeft"]  { transform: translateX(-12px); }
+html.js .animate-box[data-animate-effect="fadeInRight"] { transform: translateX(12px);  }
+html.js .animate-box[data-animate-effect="fadeIn"]      { transform: none; }
+/* When JS marks as visible */
+html.js .animate-box.in-view{
+  opacity: 1;
+  transform: none;
+}
+
+/* Already visible */
+.animate-box.in-view{
+  opacity: 1;
+  transform: none;
+}
+/* When we add the animation classes, show them */
+.animated-fast {
+  animation-duration: .6s;
+  animation-fill-mode: both;
+}
+
+/* Minimal fade-ins if you don’t use animate.css */
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes fadeInUp { from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+
+.fadeIn   { animation-name: fadeIn; }
+.fadeInUp { animation-name: fadeInUp; }
 
 /*# sourceMappingURL=style.css.map */
 /* --- Wedding Hero --- */
@@ -2282,6 +2313,10 @@ html { scroll-behavior: smooth; }
   transform: translateY(-2px);
   box-shadow: 0 22px 42px rgba(45, 37, 24, 0.24);
 }
+
+.rsvp-alt:hover,
+.rsvp-alt:focus,
+.rsvp-alt:active { color: #fff !important; }
 
 .rsvp-form-title {
   font-size: 26px;
@@ -3011,9 +3046,20 @@ html { scroll-behavior: smooth; }
 }
 
 /* Starting states for entrance */
-.album-item--duo img {
-  opacity: 0;
+/* default: images are visible */
+.album-item--duo img { 
+  opacity: 1; 
+}
+
+/* hide only while the card is flagged to animate */
+.album-item--duo.will-animate img { 
+  opacity: 0; 
   will-change: transform, opacity;
+}
+
+/* belt-and-suspenders: once visible, force shown */
+.album-item--duo.is-visible img { 
+  opacity: 1; 
 }
 
 /* Animate only after the card becomes visible (JS toggles .is-visible) */
@@ -3230,7 +3276,7 @@ body{
 }
 
 /* =========================================
-   MOBILE POLISH – place at the very end
+   MOBILE POLISH
    ========================================= */
 
 @media (max-width: 768px) {
@@ -3423,6 +3469,26 @@ body{
     min-width: 0;
     width: 100%;
   }
+
+  /* Stop using flex row on small screens */
+  #save-the-date .row {
+    display: block;
+    gap: 0;
+  }
+
+  /* Each card takes full width, stacked neatly */
+  #save-the-date .col-md-6 {
+    display: block;
+    flex: none;
+    width: 100%;
+    margin-bottom: 24px;  /* space between the two cards */
+  }
+
+  /* Let the cards size themselves naturally */
+  #save-the-date .std-card {
+    height: auto;
+    padding: 24px 24px;   /* same padding both cards */
+  }
 }
 
 /* Extra-tight tweaks for very small screens */
@@ -3445,6 +3511,112 @@ body{
 
   #invite-line .fh5co-heading h2 {
     font-size: 34px;
+  }
+
+}
+
+/* === Mobile fixes for gallery overflow === */
+@media (max-width: 768px) {
+  /* 1) Single column, natural row height */
+  .album-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  /* 2) Don't let the special big tile span extra rows on mobile */
+  .album-item--statement,
+  .album-item--horizontal {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  /* 3) Make sure figures don't leak out of the grid cell */
+  .album-item {
+    overflow: hidden;
+  }
+
+  /* 4) Keep images responsive and not absurdly tall */
+  .album-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;      /* at most 70% of screen height */
+    object-fit: cover;
+  }
+
+  /* Optional: tighten side padding on the whole gallery section */
+  #fh5co-gallery.album-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+.made-with-love{
+  padding: 28px 16px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: transparent;
+}
+.made-with-love p{
+  margin: 0;
+  font-size: 14px;
+  color: var(--letter2);
+}
+.made-with-love .sep{ margin: 0 10px; opacity: .7; }
+
+.inline-heart{
+  display: inline-block;
+  transform: translateY(1px);
+  animation: pulse .9s ease-in-out infinite;
+}
+
+/* belt-and-braces: if you keep animate-box by accident, don’t hide footer */
+.made-with-love.will-animate{ 
+  opacity: 1 !important; 
+  transform: none !important; 
+}
+/* ===== MOBILE: left-align text inside event cards ===== */
+@media (max-width: 768px){
+  /* make the card’s text flush-left */
+  #fh5co-event .event-wrap,
+  #fh5co-event .event-wrap h3,
+  #fh5co-event .event-wrap p,
+  #fh5co-event .event-wrap span,
+  #fh5co-event .event-wrap li{
+    text-align: left;
+  }
+
+  /* schedule list: switch to a neat grid */
+  .event-schedule{
+    width: 100%;
+    margin: var(--space-3) 0 0;
+    text-align: left;           /* override center */
+  }
+
+  .event-schedule li{
+    display: grid !important;   /* replace inline-flex on mobile */
+    grid-template-columns: 90px 22px 1fr;  /* time | icon | text */
+    align-items: start;
+    gap: 10px;
+    padding: 10px 0;
+    white-space: normal;        /* allow wrapping of long lines */
+    justify-content: unset;
+  }
+
+  .event-schedule .time{
+    min-width: 0;               /* let the grid control width */
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .ico-png{
+    justify-self: center;       /* keep icon nicely centered in its column */
+    align-self: start;
+    display: inline-block !important;
+  }
+
+  .event-schedule .desc{
+    grid-column: 3;             /* ensure text sits in the last column */
+    line-height: 1.6;
   }
 }
 

@@ -82,42 +82,94 @@
 
 
 
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.animate-box').waypoint( function( direction ) {
+	// New: IO-based fade-in (replaces old Waypoints logic)
+	// New: IO-based fade-in (keeps legacy effect names)
+	var contentWayPoint = function () {
+		var els = document.querySelectorAll('.animate-box');
+		if (!els.length) return;
 
-			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
-				i++;
+		var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
+		// Make hiding opt-in (prevents being stuck invisible if JS races)
+		els.forEach(function (el) { el.classList.add('will-animate'); });
 
-					$('body .animate-box.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn animated-fast');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft animated-fast');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight animated-fast');
-							} else {
-								el.addClass('fadeInUp animated-fast');
-							}
+		function reveal(el){
+			var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
+				el.classList.remove('will-animate');
+				el.classList.add('in-view','animated-fast');
 
-							el.removeClass('item-animate');
-						},  k * 200, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
+				// Animate.css v3 names (safe even if not loaded)
+				el.classList.add('animated');
+				if (effect) el.classList.add(effect);
+
+				// Animate.css v4 names (harmless if not present)
+				el.classList.add('animate__animated');
+				if (effect) el.classList.add('animate__' + effect);
+
+				el.style.opacity = '';
+				el.style.transform = '';
 			}
 
-		} , { offset: '85%' } );
-	};
+		// Duo cards (two stacked images)
+		(function observeDuo(){
+			var duoEls = document.querySelectorAll('.album-item--duo');
+			if (!duoEls.length || !('IntersectionObserver' in window)) return;
+			// mark as "will animate" so CSS can start them transparent
+  			duoEls.forEach(function(el){ el.classList.add('will-animate'); });
 
+			var duoIO = new IntersectionObserver(function(entries, obs){
+				entries.forEach(function(e){
+					if (!e.isIntersecting) return;
+					e.target.classList.add('is-visible'); // triggers your slideIn keyframes
+					obs.unobserve(e.target);
+				});
+				}, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+				duoEls.forEach(function(el){ duoIO.observe(el); });
+			})();
+
+		var io = null;
+		if ('IntersectionObserver' in window){
+			io = new IntersectionObserver(function(entries, obs){
+			entries.forEach(function(entry){
+				if (!entry.isIntersecting) return;
+				reveal(entry.target);
+				obs.unobserve(entry.target);
+			});
+			}, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+			els.forEach(function(el){ io.observe(el); });
+		} else {
+			// Old browsers: just show them
+			els.forEach(reveal);
+		}
+
+		// Kick-start anything already on screen (first load)
+		function kickstartVisible(){
+			var vh = window.innerHeight || document.documentElement.clientHeight;
+			document.querySelectorAll('.animate-box').forEach(function(el){
+			var r = el.getBoundingClientRect();
+			if (r.top < vh * 0.9 && r.bottom > 0){
+				reveal(el);
+				if (io) io.unobserve(el);
+			}
+			});
+			document.querySelectorAll('.album-item--duo').forEach(function(el){
+			var r = el.getBoundingClientRect();
+			if (r.top < vh * 0.9 && r.bottom > 0){
+				el.classList.remove('will-animate');
+				el.classList.add('is-visible');
+			}
+			});
+		}
+
+		// Run now, and after full load (covers fonts/images delaying layout)
+		kickstartVisible();
+		if (document.readyState === 'complete'){
+			setTimeout(kickstartVisible, 0);
+		} else {
+			window.addEventListener('load', function(){ setTimeout(kickstartVisible, 0); }, { once:true });
+		}
+		};
 
 	var dropdown = function() {
 
@@ -196,17 +248,52 @@
 		});
 	};
 
-	var counterWayPoint = function() {
-		if ($('#fh5co-counter').length > 0 ) {
-			$('#fh5co-counter').waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);					
-					$(this.element).addClass('animated');
+	// IntersectionObserver-based fade-in that preserves legacy effect names
+	// Trigger the number counters when the counter section enters view
+	var counterWayPoint = function () {
+		var el = document.getElementById('fh5co-counter');
+			if (!el) return;
+
+			function startCounter(){
+				if (typeof $ === 'function' && $('.js-counter').countTo){
+				$('.js-counter').countTo({
+					formatter: function (value, options) { return value.toFixed(options.decimals); }
+				});
 				}
-			} , { offset: '90%' } );
-		}
-	};
+				el.classList.add('animated');
+			}
+
+			if (!('IntersectionObserver' in window)) {
+				// old browsers: start after a brief delay
+				setTimeout(startCounter, 400);
+				return;
+			}
+
+			var io = new IntersectionObserver(function (entries, obs) {
+				entries.forEach(function (entry) {
+				if (!entry.isIntersecting) return;
+				setTimeout(startCounter, 400);
+				obs.unobserve(entry.target);
+				});
+			}, { threshold: 0.25 });
+
+			io.observe(el);
+
+			// If page already loaded and the counter is visible, kick it
+			if (document.readyState === 'complete'){
+				var r = el.getBoundingClientRect();
+				if (r.top < (window.innerHeight || 0) && r.bottom > 0) {
+				setTimeout(startCounter, 0);
+				}
+			} else {
+				window.addEventListener('load', function(){
+				var r2 = el.getBoundingClientRect();
+				if (r2.top < (window.innerHeight || 0) && r2.bottom > 0) {
+					setTimeout(startCounter, 0);
+				}
+				}, { once:true });
+			}
+		};
 
 	// Parallax
 	var parallax = function() {
@@ -224,9 +311,22 @@
 		testimonialCarousel();
 		goToTop();
 		loaderPage();
-		counter();
+		// counter();
 		counterWayPoint();
 	});
+
+	// After full page (including images) has loaded, recalculate waypoints
+	// window.addEventListener('load', function () {
+	// 	// Waypoints 4.x global refresh
+	// 	if (window.Waypoint && typeof Waypoint.refreshAll === 'function') {
+	// 		Waypoint.refreshAll();
+	// 	}
+	// 	// Fallback for older jQuery Waypoints
+	// 	else if (window.jQuery && jQuery.waypoints) {
+	// 		jQuery.waypoints('refresh');
+	// 	}
+	// 	});
+
 
 
 }());
