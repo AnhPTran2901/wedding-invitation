@@ -219,7 +219,7 @@
 		parallax();
 		offcanvasMenu();
 		burgerMenu();
-		contentWayPoint();
+		// contentWayPoint();
 		dropdown();
 		testimonialCarousel();
 		goToTop();
