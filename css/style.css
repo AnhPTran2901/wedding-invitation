@@ -2022,11 +2022,6 @@ html { scroll-behavior: smooth; }
   background: url(../images/loader.gif) center no-repeat #fff;
 }
 
-.js .animate-box {
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
 /* Fade/slide baseline: start hidden only when JS is enabled */
 html.js .animate-box{
   opacity: 0;
