@@ -8,6 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script>document.documentElement.classList.add('js');</script>
 	<title>Phuong Anh &amp; Dac Trung — Wedding Celebration</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Join Phuong Anh Tran &amp; Dac Trung Nguyen for their December 27, 2025 wedding in Ha Noi, Vietnam." />
@@ -609,7 +610,7 @@
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- <script src="js/jquery.waypoints.min.js"></script> -->
 	<!-- Carousel -->
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
@@ -997,6 +998,45 @@ function initScrollSpyNav() {
 onDocumentReady(initScrollSpyNav);
 onDocumentReady(initRsvpForm);
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var els = document.querySelectorAll('.animate-box');
+
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) {
+      var effect = el.getAttribute('data-animate-effect') || 'fadeInUp';
+      el.classList.add('animated-fast', effect);
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var observer = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+
+      var el = entry.target;
+      var effect = prefersReduced ? 'fadeIn' : (el.getAttribute('data-animate-effect') || 'fadeInUp');
+
+      el.classList.add('animated-fast', effect);
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+
+      obs.unobserve(el);  // animate once
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -10%'
+  });
+
+  els.forEach(function (el) { observer.observe(el); });
+});
+</script>
+
 </body>
 </html>
 

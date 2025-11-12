@@ -2027,6 +2027,26 @@ html { scroll-behavior: smooth; }
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+/* Enable JS-only hidden start */
+html.js .animate-box {
+  opacity: 0;
+  transform: translateY(12px);   /* small lift for fadeInUp */
+  will-change: opacity, transform;
+}
+
+/* When we add the animation classes, show them */
+.animated-fast {
+  animation-duration: .6s;
+  animation-fill-mode: both;
+}
+
+/* Minimal fade-ins if you don’t use animate.css */
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes fadeInUp { from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+
+.fadeIn   { animation-name: fadeIn; }
+.fadeInUp { animation-name: fadeInUp; }
+
 /*# sourceMappingURL=style.css.map */
 /* --- Wedding Hero --- */
 .hero {
