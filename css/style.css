@@ -3546,5 +3546,18 @@ body{
     padding-right: 1rem;
   }
 }
-
+.made-with-love{
+  margin: 28px auto 18px;
+  max-width: 860px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--letter2);
+  background: var(--paper);
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(155,106,142,.10);
+}
+.made-with-love .sep{ opacity:.55; margin: 0 .6em; }
+.made-with-love .heart{ margin: 0 .25em; }
 
